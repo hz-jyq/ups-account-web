@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan("com.pgy.account.web.dao")
 public class UpsAccountWebApplication {
 
-	public static void main(String[] args) { 
+	public static void main(String[] args) {
 		
 		SpringApplication.run(UpsAccountWebApplication.class, args);
 	}
