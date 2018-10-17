@@ -30,6 +30,7 @@ import com.pgy.account.web.utils.CookieUtils;
 import com.pgy.account.web.utils.FreemarkerUtils;
 import com.pgy.account.web.utils.annotation.ParamsLog;
 import com.pgy.account.web.utils.annotation.RequiredPermission;
+import com.pgy.ups.account.facade.dubbo.api.DubboService;
 
 /**
  * 首页登录
@@ -57,7 +58,9 @@ public class IndexController {
 
 	@Resource
 	private PremissionApi premissionApi;
-
+	
+	@Resource
+    private DubboService dubboService;
 	/**
 	 * 
 	 * 首页登录
@@ -115,7 +118,8 @@ public class IndexController {
 	@ResponseBody
 	@PostMapping("/T1")
 	public Vo queryTab() {
-		return new Vo(VoCodeConstant.SUCCESS);
+		System.out.println(dubboService.doService());
+		return  new Vo(VoCodeConstant.BUSSINDESS_ERROR);
 	}
 
 }
