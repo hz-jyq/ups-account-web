@@ -14,13 +14,14 @@ import com.alibaba.dubbo.common.utils.StringUtils;
 import com.pgy.account.web.dao.UserDao;
 import com.pgy.account.web.exception.ParamValidException;
 import com.pgy.account.web.model.entity.User;
+import com.pgy.account.web.service.LoginService;
 import com.pgy.account.web.utils.BussinessUtils;
 import com.pgy.account.web.utils.CookieUtils;
 import com.pgy.account.web.utils.RedisUtils;
 
 @Component
 @ConfigurationProperties
-public class LoginServiceImpl {
+public class LoginServiceImpl implements LoginService{
 	
 	@Value("${login.loginTimeOut}")
 	private Integer loginTimeOut;

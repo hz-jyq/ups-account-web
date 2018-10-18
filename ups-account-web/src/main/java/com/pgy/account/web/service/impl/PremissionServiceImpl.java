@@ -21,6 +21,7 @@ import com.pgy.account.web.model.entity.Link;
 import com.pgy.account.web.model.entity.Menu;
 import com.pgy.account.web.model.entity.Role;
 import com.pgy.account.web.model.entity.User;
+import com.pgy.account.web.service.PremissionService;
 
 /**
  * 权限API
@@ -29,7 +30,7 @@ import com.pgy.account.web.model.entity.User;
  *
  */
 @Component
-public class PremissionServiceImpl {
+public class PremissionServiceImpl implements PremissionService{
 
 	@Resource
 	private UserDao useDao;
