@@ -13,10 +13,10 @@ import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.druid.util.StringUtils;
-import com.pgy.account.web.api.LoginApi;
-import com.pgy.account.web.api.PremissionApi;
 import com.pgy.account.web.exception.BussinessException;
 import com.pgy.account.web.model.entity.User;
+import com.pgy.account.web.service.impl.LoginServiceImpl;
+import com.pgy.account.web.service.impl.PremissionServiceImpl;
 import com.pgy.account.web.utils.CookieUtils;
 
 /**
@@ -33,10 +33,10 @@ public class PremissionAop implements Ordered{
 	private HttpServletRequest request;
 	
 	@Resource
-	private LoginApi loginApi;
+	private LoginServiceImpl loginApi;
 	
 	@Resource
-	private PremissionApi premissionApi;
+	private PremissionServiceImpl premissionApi;
 	
 	
 	
@@ -50,7 +50,7 @@ public class PremissionAop implements Ordered{
 		if(!flag) {
 			throw new BussinessException("登录失败或超时，请重新登录！");
 		}
-		String userName=CookieUtils.getCookieValue(request, LoginApi.USER_NAME);
+		String userName=CookieUtils.getCookieValue(request, LoginServiceImpl.USER_NAME);
 		if(StringUtils.isEmpty(userName)) {
 			throw new BussinessException("cookie中未能获取user信息！");
 		}

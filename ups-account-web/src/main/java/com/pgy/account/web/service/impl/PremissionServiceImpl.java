@@ -1,4 +1,4 @@
-package com.pgy.account.web.api;
+package com.pgy.account.web.service.impl;
 
 import java.util.Collections;
 import java.util.List;
@@ -13,14 +13,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.dubbo.common.utils.CollectionUtils;
+import com.pgy.account.web.dao.MenuDao;
+import com.pgy.account.web.dao.RoleDao;
+import com.pgy.account.web.dao.UserDao;
 import com.pgy.account.web.exception.BussinessException;
 import com.pgy.account.web.model.entity.Link;
 import com.pgy.account.web.model.entity.Menu;
 import com.pgy.account.web.model.entity.Role;
 import com.pgy.account.web.model.entity.User;
-import com.pgy.account.web.service.MenuService;
-import com.pgy.account.web.service.RoleService;
-import com.pgy.account.web.service.UserService;
 
 /**
  * 权限API
@@ -29,18 +29,18 @@ import com.pgy.account.web.service.UserService;
  *
  */
 @Component
-public class PremissionApi {
+public class PremissionServiceImpl {
 
 	@Resource
-	private UserService useService;
+	private UserDao useDao;
 
 	@Resource
-	private RoleService roleService;
+	private RoleDao roleDao;
 
 	@Resource
-	private MenuService menuService;
+	private MenuDao menuDao;
 
-	private Logger logger = LoggerFactory.getLogger(PremissionApi.class);
+	private Logger logger = LoggerFactory.getLogger(PremissionServiceImpl.class);
 
 	/**
 	 * 查询用户权限下的一级菜单
@@ -55,7 +55,7 @@ public class PremissionApi {
 		}
 		// 构建有set序集，按照菜单order大小比较
 		for (Role r : roles) {
-			Role role = roleService.queryRole(r);
+			Role role = roleDao.queryRole(r);
 			List<Menu> ms = role.getMenus();
 			if (!CollectionUtils.isEmpty(ms)) {
 				return ms.stream().filter(e -> {
@@ -74,7 +74,7 @@ public class PremissionApi {
 	 * @return
 	 */
 	public List<Role> queryUserRoles(User user) {
-		User u = useService.queryUser(user);
+		User u = useDao.queryUser(user);
 		if (Objects.isNull(u)) {
 			throw new RuntimeException("用户信息查询为空！");
 		}
@@ -93,7 +93,7 @@ public class PremissionApi {
 	 * @return
 	 */
 	public List<Menu> queryAvalibleSubMenus(Menu m) {
-		Menu menu = menuService.queryMenu(m);
+		Menu menu = menuDao.queryMenu(m);
 		if (Objects.isNull(menu)) {
 			throw new BussinessException("没有查询到该菜单信息！");
 		}
@@ -120,7 +120,7 @@ public class PremissionApi {
 	 * @return
 	 */
 	public List<String> getUserBlackNames(User user) {
-		User u = useService.queryUser(user);
+		User u = useDao.queryUser(user);
 		if (Objects.isNull(u)) {
 			throw new BussinessException("未查询到用户信息！userName=" + user);
 		}

@@ -15,22 +15,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.pgy.account.web.api.LoginApi;
-import com.pgy.account.web.api.PremissionApi;
 import com.pgy.account.web.constant.VoCodeConstant;
 import com.pgy.account.web.exception.ParamValidException;
 import com.pgy.account.web.model.entity.Menu;
 import com.pgy.account.web.model.entity.User;
 import com.pgy.account.web.model.vo.Vo;
+import com.pgy.account.web.service.LoginService;
+import com.pgy.account.web.service.PremissionService;
+import com.pgy.account.web.service.impl.LoginServiceImpl;
 import com.pgy.account.web.utils.CookieUtils;
 import com.pgy.account.web.utils.FreemarkerUtils;
 import com.pgy.account.web.utils.annotation.ParamsLog;
 import com.pgy.account.web.utils.annotation.RequiredPermission;
-import com.pgy.ups.account.facade.dubbo.api.DubboService;
 
 /**
  * 首页登录
@@ -54,13 +53,11 @@ public class IndexController {
 	private FreemarkerUtils freemarkerUtils;
 
 	@Resource
-	private LoginApi loginApi;
+	private LoginService loginService;
 
 	@Resource
-	private PremissionApi premissionApi;
+	private PremissionService premissionService;
 	
-	@Resource
-    private DubboService dubboService;
 	/**
 	 * 
 	 * 首页登录
@@ -71,11 +68,11 @@ public class IndexController {
 
 	@RequestMapping
 	public String index(ModelMap modelMap) {
-		String userName = CookieUtils.getCookieValue(request, LoginApi.USER_NAME);
+		String userName = CookieUtils.getCookieValue(request, LoginServiceImpl.USER_NAME);
 		User user = new User();
 		user.setUserName(userName);
 		// 加载一级菜单列表
-		Set<Menu> menus = premissionApi.queryUserMenus(user, 1);
+		Set<Menu> menus = premissionService.queryUserMenus(user, 1);
 		modelMap.put("menus", menus);
 		modelMap.put("userName", userName);
 		return "/index";
@@ -97,11 +94,11 @@ public class IndexController {
 			throw new ParamValidException("菜单连接编码不能为空！");
 		}
 		// 获取当前用户登录信息
-		String userName = CookieUtils.getCookieValue(request, LoginApi.USER_NAME);
+		String userName = CookieUtils.getCookieValue(request, LoginServiceImpl.USER_NAME);
 		User u = new User();
 		u.setUserName(userName);
 		// 查询该用户权限下的所有二级菜单（二级菜单为选项卡）
-		Set<Menu> subMenus = premissionApi.queryUserMenus(u, 2);
+		Set<Menu> subMenus = premissionService.queryUserMenus(u, 2);
 		//保留父菜单与入参linkedCode相同的二级菜单
 		subMenus=subMenus.stream().filter(tab -> {
 			Menu parentMenu = tab.getParentMenu();
@@ -113,13 +110,6 @@ public class IndexController {
 		// 渲染页面并返回html文本
 		String html = freemarkerUtils.getFreemarkerPageToString("/index/tabs.ftl", dataMap);
 		return new Vo(VoCodeConstant.SUCCESS).putResult("html", html);
-	}
-
-	@ResponseBody
-	@PostMapping("/T1")
-	public Vo queryTab() {
-		System.out.println(dubboService.doService());
-		return  new Vo(VoCodeConstant.BUSSINDESS_ERROR);
 	}
 
 }

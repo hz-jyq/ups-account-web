@@ -1,4 +1,4 @@
-package com.pgy.account.web.api;
+package com.pgy.account.web.service.impl;
 
 import java.util.Objects;
 
@@ -11,16 +11,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.dubbo.common.utils.StringUtils;
+import com.pgy.account.web.dao.UserDao;
 import com.pgy.account.web.exception.ParamValidException;
 import com.pgy.account.web.model.entity.User;
-import com.pgy.account.web.service.UserService;
 import com.pgy.account.web.utils.BussinessUtils;
 import com.pgy.account.web.utils.CookieUtils;
 import com.pgy.account.web.utils.RedisUtils;
 
 @Component
 @ConfigurationProperties
-public class LoginApi {
+public class LoginServiceImpl {
 	
 	@Value("${login.loginTimeOut}")
 	private Integer loginTimeOut;
@@ -36,7 +36,7 @@ public class LoginApi {
 	public static final String USER_ID="userId";
      
 	@Resource
-	private UserService userService;
+	private UserDao userDao;
 	
 	@Resource
 	private RedisUtils redisUtils;
@@ -51,7 +51,7 @@ public class LoginApi {
 		if(StringUtils.isEmpty(user.getUserName())||StringUtils.isEmpty(user.getUserName())) {
 			throw new ParamValidException("账户或账户密码不能为空！");
 		}
-		return userService.queryUserByUserNameAndPassword(user);
+		return userDao.queryUserByUserNameAndPassword(user);
 	}
 
     /**
