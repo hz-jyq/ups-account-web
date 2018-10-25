@@ -86,9 +86,8 @@ public class IndexController {
 	 * @throws ParamValidException
 	 */
 
-	@ResponseBody
 	@GetMapping("/queryTab/{linkedCode}")
-	public Vo queryTab(@PathVariable String linkedCode) throws ParamValidException {
+	public String queryTab(@PathVariable String linkedCode,ModelMap modelMap) throws ParamValidException {
 		// 查询一级菜单下的二级菜单(选项卡)
 		if (StringUtils.isEmpty(linkedCode)) {
 			throw new ParamValidException("菜单连接编码不能为空！");
@@ -103,13 +102,10 @@ public class IndexController {
 		subMenus=subMenus.stream().filter(tab -> {
 			Menu parentMenu = tab.getParentMenu();
 			return !Objects.isNull(parentMenu) && linkedCode.equals(parentMenu.getLinkCode());
-		}).collect(Collectors.toSet());
-		
-		Map<String, Object> dataMap = new LinkedHashMap<>(4);
-		dataMap.put("subMenus", subMenus);
+		}).collect(Collectors.toSet());		
+		modelMap.put("subMenus", subMenus);
 		// 渲染页面并返回html文本
-		String html = freemarkerUtils.getFreemarkerPageToString("/index/tabs.ftl", dataMap);
-		return new Vo(VoCodeConstant.SUCCESS).putResult("html", html);
+		return "/index/tabs";
 	}
 
 }

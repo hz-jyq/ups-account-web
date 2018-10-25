@@ -10,7 +10,6 @@ public class UpsAccountWebApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(UpsAccountWebApplication.class, args);
-	}
-	
+	}	
 
 }

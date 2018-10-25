@@ -8,12 +8,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="static/plugin/bootstrap3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="static/plugin/bootstrap3.3.7/css/bootstrap-datetimepicker.min.css">
 		<title>UPS账务管理系统同</title>
 	</head>
 	<script src="static/js/jquery-3.2.1.min.js"></script>
 	<script src="static/plugin/bootstrap3.3.7/js/bootstrap.min.js"></script>
+	<script src="static/plugin/bootstrap3.3.7/js/bootstrap-datetimepicker.min.js"></script>
 	<script src="http://bootboxjs.com/bootbox.js"></script>
 	<script type="text/javascript" src="static/js/public/public.js"></script>
+	<script type="text/javascript" src="static/js/public/table-page.js"></script>
 	<style type="text/css">
 		body {
 			padding: 20px;
@@ -59,7 +62,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3" align="center" style="padding-top: 50px;">
+			<div class="col-md-2" align="center" style="padding-top: 50px;">
 				<div id="menus" class="list-group">
 					<a href="#" class="list-group-item active">
 						系统菜单
@@ -68,13 +71,13 @@
 					<#include "/index/menu.ftl" />
 				</div>
 			</div>
-			<div class="col-md-9" align="center" style="padding-left: 50px;">
+			<div class="col-md-10" align="center" style="padding-left: 20px;">
 				<!--选项卡以及内容部分-->
 				<div class="row" id="tabs"></div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-10">
 				<div align="center" style="padding-top: 200px">
 					<p align="center" style="margin-top: 20px;color:#878B91;">
 						Copyright 蒲公英数据科技有限公司&copy;2017-2020
@@ -82,7 +85,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+		</div>
 
 	</body>
 	<script type="text/javascript">
@@ -97,18 +100,13 @@
 				url: "/ups-account-web/index/queryTab/" + linkCode,
 				type: "get",
 				async: true,
-				dataType: "json",
+				dataType: "html",
 				cache: false,
 				error: function() {
-
+                  $alert('网络异常，刷新后重试！')
 				},
-				success: function(vo) {
-					if(vo.resultCode == '00') {
-						//alert(vo.result.html);
-						$("#tabs").empty().html(vo.result.html);
-					} else {
-						$alert(vo.message)
-					}
+				success: function(h) {
+					$("#tabs").empty().html(h);
 				}
 			});
 		}
@@ -119,16 +117,12 @@
 				url: linkUrl,
 				type: "post",
 				async: true,
-				dataType: "json",
+				dataType: "html",
 				error: function() {
-
+                    $alert('网络异常，刷新后重试！')
 				},
-				success: function(vo) {
-					if(vo.resultCode == '00') {
-						$("#" + linkCode).empty().html(vo.result.data);
-					} else {
-						$alert(vo.message);
-					}
+				success: function(h) {
+					$("#" + linkCode).empty().html(h);
 				}
 			});
 		}

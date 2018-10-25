@@ -14,11 +14,11 @@
 </ul>
 
 <!--选项卡内容列表-->
-<div class="tab-content">
+<div class="tab-content" style="width: 90%;">
 	<#if subMenus?? && subMenus?size gt 0>
 		<#list subMenus as tab>
 			<div <#if (tab_index)==0>class="tab-pane fade in active"<#else>class="tab-pane fade"</#if>  id="${tab.linkCode!''}">
-		      ${tab.linkCode!''}
+		      
 	        </div>
 	    </#list>	
 	</#if>
