@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.pgy.account.web.utils.FreemarkerUtils;
-import com.pgy.account.web.utils.ParamUtils;
 import com.pgy.account.web.utils.annotation.ParamsLog;
 import com.pgy.account.web.utils.annotation.RequiredPermission;
 import com.pgy.ups.account.facade.dubbo.api.ProofreadErrorService;
