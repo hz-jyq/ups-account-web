@@ -177,10 +177,7 @@
 		<div class="col-md-4">
 
 		</div>
-		<div class="col-md-4">
-
-		</div>
-		<div class="col-md-4">
+		<div class="col-md-8">
 			<ul class="pagination" id="proofreadSumPage">
 				<!--<li>
 					<a href="javascript:void(0)">«</a>

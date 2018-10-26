@@ -159,10 +159,7 @@
 		<div class="col-md-4">
 
 		</div>
-		<div class="col-md-4">
-
-		</div>
-		<div class="col-md-4">
+		<div class="col-md-8">
 			<ul class="pagination" id="proofreadErrorPage">
 				<!--<li>
 					<a href="javascript:void(0)">«</a>
@@ -208,7 +205,7 @@
 		var elements = {
 			pageNum: page,
 			data: $("#queryProofreadErrorForm").serialize(),
-			paginationId: "paginationId",
+			paginationId: "proofreadErrorPage",
 			dataAreaId: "proofreadErrorBody",
 			pageSize: "8",
 			action: "/ups-account-web/proofreadError/queryProofreadErrorList"
