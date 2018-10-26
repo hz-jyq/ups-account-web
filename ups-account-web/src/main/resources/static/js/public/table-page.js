@@ -1,6 +1,6 @@
 $.extend({
 	'queryPage': function(elements, page) {
-		var pageNum = page;
+		var pageNumber = page;
 		var data = elements.data;
 		var paginationId = elements.paginationId;
 		var dataAreaId = elements.dataAreaId;
@@ -15,7 +15,7 @@ $.extend({
 
 		$.ajax({
 			type: "post",
-			url: action + "?page=" + pageNum + "&pageSize" + pageSize,
+			url: action + "?pageNumber=" + pageNumber + "&pageSize=" + pageSize,
 			async: async,
 			data: data,
 			dataType: "json",

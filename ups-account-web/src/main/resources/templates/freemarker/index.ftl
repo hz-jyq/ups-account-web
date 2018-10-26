@@ -65,7 +65,7 @@
 			<div class="col-md-2" align="center" style="padding-top: 50px;">
 				<div id="menus" class="list-group">
 					<a href="#" class="list-group-item active">
-						系统菜单
+						主菜单
 					</a>
 					<!--系统菜单列表 根据权限加载-->
 					<#include "/index/menu.ftl" />
