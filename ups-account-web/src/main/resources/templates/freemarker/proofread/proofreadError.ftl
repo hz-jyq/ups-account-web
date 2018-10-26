@@ -129,11 +129,12 @@
 	<br>
 	<h3>对账异常明细表</h3>
 	<br>
-	<table class="table table-bordered table-striped table-hover">
+	<div style="width:1000px;overflow-x:auto;">
+	<table class="table table-bordered table-striped table-hover" style="width: 1400px;">
 		<thead>
 			<tr>
 				<th>对账日期</th>
-				<th>业务类型</th>
+				<th style="width: 100px">业务类型</th>
 				<th>商户订单号</th>
 				<th>借款编号</th>
 				<th>业务交易金额</th>
@@ -177,10 +178,13 @@
 				</li>-->
 			</ul>
 		</div>
-
+	</div>
 	</div>
 </div>
 <script type="text/javascript">
+	$(function(){
+		queryProofreadError(1);
+	});
 	//初始化日期控件 对账日期
 	$(".date").datetimepicker({
 		language: "zh-CN",
@@ -211,4 +215,6 @@
 		};
 		$.queryPage(elements, page);
 	}
+	
+	
 </script>

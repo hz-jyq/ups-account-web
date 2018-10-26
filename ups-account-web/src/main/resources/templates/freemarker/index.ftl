@@ -40,7 +40,7 @@
 	<!--必须使用较新版本的BootStrap才有如下效果-->
 
 	<body>
-		<div class="container">
+		<div class="container" style="width: 1200px;">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="page-header">
@@ -48,45 +48,44 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div>
-					<ol class="breadcrumb">
-						<li><span class="glyphicon glyphicon-home"></span>&nbsp;
-							<a href="javascript:void(0)" onclick="loginOut()">退出登录</a>
-						</li>
-						<li class="active">当前用户：${userName!''}</li>
-					</ol>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2" align="center" style="padding-top: 50px;">
-				<div id="menus" class="list-group">
-					<a href="#" class="list-group-item active">
-						主菜单
-					</a>
-					<!--系统菜单列表 根据权限加载-->
-					<#include "/index/menu.ftl" />
-				</div>
-			</div>
-			<div class="col-md-10" align="center" style="padding-left: 20px;">
-				<!--选项卡以及内容部分-->
-				<div class="row" id="tabs"></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-10">
-				<div align="center" style="padding-top: 200px">
-					<p align="center" style="margin-top: 20px;color:#878B91;">
-						Copyright 蒲公英数据科技有限公司&copy;2017-2020
-					</p>
-				</div>
-			</div>
-		</div>
-		</div>
 
+			<div class="row">
+				<div class="col-md-12">
+					<div>
+						<ol class="breadcrumb">
+							<li><span class="glyphicon glyphicon-home"></span>&nbsp;
+								<a href="javascript:void(0)" onclick="loginOut()">退出登录</a>
+							</li>
+							<li class="active">当前用户：${userName!''}</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2" align="center" style="padding-top: 50px;">
+					<div id="menus" class="list-group">
+						<a href="#" class="list-group-item active">
+							主菜单
+						</a>
+						<!--系统菜单列表 根据权限加载-->
+						<#include "/index/menu.ftl" />
+					</div>
+				</div>
+				<div class="col-md-10" align="center" style="padding-left: 20px;">
+					<!--选项卡以及内容部分-->
+					<div class="row" id="tabs"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-10">
+					<div align="center" style="padding-top: 200px">
+						<p align="center" style="margin-top: 20px;color:#878B91;">
+							Copyright 蒲公英数据科技有限公司&copy;2017-2020
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 	<script type="text/javascript">
 		//登出
@@ -103,7 +102,7 @@
 				dataType: "html",
 				cache: false,
 				error: function() {
-                  $alert('网络异常，刷新后重试！')
+					$alert('网络异常，刷新后重试！')
 				},
 				success: function(h) {
 					$("#tabs").empty().html(h);
@@ -119,7 +118,7 @@
 				async: true,
 				dataType: "html",
 				error: function() {
-                    $alert('网络异常，刷新后重试！')
+					$alert('网络异常，刷新后重试！')
 				},
 				success: function(h) {
 					$("#" + linkCode).empty().html(h);

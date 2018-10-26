@@ -149,12 +149,13 @@
 	<br>
 	<h3>系统对账汇总表</h3>
 	<br>
-	<table class="table table-bordered table-striped table-hover">
+	<div style="width:1000px;overflow-x:auto;">
+	<table class="table table-bordered table-striped table-hover" style="width: 1300px;">
 		<thead>
 			<tr>
 				<th>创建时间</th>
 				<th>商户号/账户号</th>
-				<th>业务类型</th>
+				<th style="width: 100px;">业务类型</th>
 				<th>对账渠道</th>
 				<th>对账日期</th>
 				<th>业务总金额/总笔数</th>
@@ -195,10 +196,14 @@
 				</li>-->
 			</ul>
 		</div>
-
+	</div>
 	</div>
 </div>
 <script type="text/javascript">
+	
+	$(function(){
+		queryProofreadSum(1);
+	});
 	//初始化日期控件 对账日期
 	$(".date").datetimepicker({
 		language:"zh-CN",
@@ -222,7 +227,7 @@
 		var elements={
 			pageNum:page,
 			data:$("#queryProofreadSumForm").serialize(),
-			paginationId:"paginationId",
+			paginationId:"proofreadSumPage",
 			dataAreaId:"proofreadSumBody",
 			pageSize:"8",
 			action:"/ups-account-web/proofreadSum/queryProofreadSumList"

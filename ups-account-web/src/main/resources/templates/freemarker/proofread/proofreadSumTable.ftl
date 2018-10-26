@@ -1,5 +1,5 @@
-<#if proofreadSumList??&&proofreadSumList?size>0>
-	<#list proofreadSumList as proofreadSum>
+<#if proofreadSumList??&&proofreadSumList?size gt 0>
+	<#list proofreadSumList as proofreadSum>		
 		<tr>
 			<td>
 				${proofreadSum.createTime!''}
@@ -15,15 +15,15 @@
 						米融
 					<#elseif proofreadSum.fromSystem=='03'>
 						秒呗
-					</#else>
+					</#if>
 				</#if>
 				-
 				<#if proofreadSum.proofreadType??>
-					<#if proofreadSum.fromSystem=='01'>
+					<#if proofreadSum.proofreadType=='01'>
 						借款
-					<#elseif proofreadSum.fromSystem=='02'>
+					<#elseif proofreadSum.proofreadType=='02'>
 						还款
-					</#else>
+					</#if>
 				</#if>
 			</td>
 			<td>
@@ -55,8 +55,8 @@
 						有异常
 					<#elseif proofreadSum.proofreadStatus=='03'>
 						待对账
-					</#else>
-				</#if>				
+					</#if>
+				</#if>		
 			</td>
 			<td>
 				
@@ -68,5 +68,5 @@
 				${proofreadSum.updateUser!''}
 			</td>
 		</tr>
-	</#list>
+  </#list>
 </#if>
