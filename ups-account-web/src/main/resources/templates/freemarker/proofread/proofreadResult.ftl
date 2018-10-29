@@ -138,4 +138,19 @@
 		};
 		$.queryPage(elements, page);
 	}
+	
+	//业务数据下载
+	function businessDownload(channel,fromSystem,proofreadType,proofreadDate){
+		
+	}
+	
+	//渠道数据下载
+	function channelDownload(channel,fromSystem,proofreadType,proofreadDate){
+		
+	}
+	
+	//对账成功数据下载
+	function successDownLoad(channel,fromSystem,proofreadType,proofreadDate){		
+		window.location.href="/ups-account-web/proofreadResult/successDownload/"+channel+"/"+fromSystem+"/"+proofreadType+"/"+proofreadDate;
+	}
 </script>
