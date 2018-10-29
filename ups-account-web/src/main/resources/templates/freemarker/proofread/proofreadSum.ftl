@@ -210,20 +210,8 @@
 		<div class="col-md-4">
 
 		</div>
-		<div class="col-md-8">
+		<div class="col-md-8" style="text-align: right;">
 			<ul class="pagination" id="proofreadSumPage">
-				<!--<li>
-					<a href="javascript:void(0)">«</a>
-				</li>
-				<li class="active">
-					<a href="javascript:void(0)">1</a>
-				</li>
-				<li class="disabled">
-					<a href="javascript:void(0)">2</a>
-				</li>
-				<li>
-					<a href="javascript:void(0)">3</a>
-				</li>-->
 			</ul>
 		</div>
 	</div>

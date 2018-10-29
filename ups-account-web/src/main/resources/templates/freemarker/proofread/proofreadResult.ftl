@@ -95,7 +95,7 @@
 		<div class="col-md-4">
 
 		</div>
-		<div class="col-md-8">
+		<div class="col-md-8" style="text-align: right;">
 			<ul class="pagination" id="proofreadResultPage">
 				<!--<li>
 					<a href="javascript:void(0)">«</a>

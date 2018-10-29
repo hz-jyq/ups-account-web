@@ -29,6 +29,8 @@ public class DubboConfiguration {
     public ConsumerConfig consumerConfig(DubboProperties dubboProperties) {
         ConsumerConfig consumerConfig = new ConsumerConfig();
         consumerConfig.setTimeout(dubboProperties.getTimeout());
+        //设置消费方启动 dubbo服务方未启动造成的null指针异常
+        consumerConfig.setCheck(false);
         return consumerConfig;
     }
 

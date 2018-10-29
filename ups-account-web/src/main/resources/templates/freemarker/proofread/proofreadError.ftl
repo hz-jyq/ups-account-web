@@ -2,8 +2,8 @@
 	<br>
 	<br>
 	<br>
-	<div class="row">
-		<form id="queryProofreadErrorForm">
+	<form id="queryProofreadErrorForm">
+	<div class="row">		
 			<div class="col-md-3">
 				<!--下拉框的固定写法，不可变动-->
 				<div class="input-group">
@@ -73,7 +73,6 @@
 			</div>
 	</div>
 	<br>
-
 	<div class="row">
 		<div class="col-md-3">
 			<!--下拉框的固定写法，不可变动-->
@@ -118,14 +117,15 @@
 				<input type="text" class="form-control date" name="proofreadDateEnd">
 			</div>
 		</div>
-	</div>
+	</div>	
+	</form>
 	<br />
 	<div class="row">
 		<div class="col-md-12" style="text-align: right;">
 			<button type="button" class="btn btn-success" onclick="queryProofreadError('1')">查询记录</button>
 		</div>
 	</div>
-	</form>
+	
 	<br>
 	<h3>对账异常明细表</h3>
 	<br>
@@ -160,7 +160,7 @@
 		<div class="col-md-4">
 
 		</div>
-		<div class="col-md-8">
+		<div class="col-md-8" style="text-align: right;">
 			<ul class="pagination" id="proofreadErrorPage">
 				<!--<li>
 					<a href="javascript:void(0)">«</a>
