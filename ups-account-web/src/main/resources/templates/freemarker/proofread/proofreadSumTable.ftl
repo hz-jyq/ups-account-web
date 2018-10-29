@@ -27,7 +27,13 @@
 				</#if>
 			</td>
 			<td>
-				宝付
+				<#if proofreadSum.channel??>
+					<#if proofreadSum.channel=='01'>
+						宝付
+					<#elseif proofreadSum.proofreadType=='02'>
+						其他
+					</#if>
+				</#if>
 			</td>
 			<td>
 				${proofreadSum.proofreadDate!''}

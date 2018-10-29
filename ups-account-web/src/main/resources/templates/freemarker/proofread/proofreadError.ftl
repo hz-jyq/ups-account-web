@@ -130,7 +130,7 @@
 	<h3>对账异常明细表</h3>
 	<br>
 	<div style="width:1000px;overflow-x:auto;">
-	<table class="table table-bordered table-striped table-hover" style="width: 1400px;">
+	<table class="table table-bordered table-striped table-hover" style="width: 1800px;">
 		<thead>
 			<tr>
 				<th>对账日期</th>

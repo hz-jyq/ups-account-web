@@ -150,7 +150,7 @@
 	<h3>系统对账汇总表</h3>
 	<br>
 	<div style="width:1000px;overflow-x:auto;">
-	<table class="table table-bordered table-striped table-hover" style="width: 1300px;">
+	<table class="table table-bordered table-striped table-hover" style="width: 1800px;">
 		<thead>
 			<tr>
 				<th>创建时间</th>
