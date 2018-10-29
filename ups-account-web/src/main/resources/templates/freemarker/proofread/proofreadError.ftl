@@ -2,8 +2,8 @@
 	<br>
 	<br>
 	<br>
-	<div class="row">
-		<form id="queryProofreadErrorForm">
+	<form id="queryProofreadErrorForm">
+	<div class="row">		
 			<div class="col-md-3">
 				<!--下拉框的固定写法，不可变动-->
 				<div class="input-group">
@@ -73,7 +73,6 @@
 			</div>
 	</div>
 	<br>
-
 	<div class="row">
 		<div class="col-md-3">
 			<!--下拉框的固定写法，不可变动-->
@@ -118,48 +117,50 @@
 				<input type="text" class="form-control date" name="proofreadDateEnd">
 			</div>
 		</div>
-	</div>
+	</div>	
+	</form>
 	<br />
 	<div class="row">
 		<div class="col-md-12" style="text-align: right;">
 			<button type="button" class="btn btn-success" onclick="queryProofreadError('1')">查询记录</button>
 		</div>
 	</div>
-	</form>
+	
 	<br>
 	<h3>对账异常明细表</h3>
 	<br>
 	<div style="width:1000px;overflow-x:auto;">
-	<table class="table table-bordered table-striped table-hover" style="width: 1800px;">
-		<thead>
-			<tr>
-				<th>对账日期</th>
-				<th style="width: 100px">业务类型</th>
-				<th>商户订单号</th>
-				<th>借款编号</th>
-				<th>业务交易金额</th>
-				<th>业务状态</th>
-				<th>业务申请时间</th>
-				<th>渠道交易金额</th>
-				<th>渠道订单状态</th>
-				<th>渠道交易时间</th>
-				<th>异常类型</th>
-				<th>流水状态</th>
-				<th>处理时间</th>
-				<th>操作</th>
-				<th>备注</th>
-				<th>操作员</th>
-			</tr>
-		</thead>
-		<tbody id="proofreadErrorBody">
+		<table class="table table-bordered table-striped table-hover" style="width: 1800px;">
+			<thead>
+				<tr>
+					<th>对账日期</th>
+					<th style="width: 100px">业务类型</th>
+					<th>商户订单号</th>
+					<th>借款编号</th>
+					<th>业务交易金额</th>
+					<th>业务状态</th>
+					<th>业务申请时间</th>
+					<th>渠道交易金额</th>
+					<th>渠道订单状态</th>
+					<th>渠道交易时间</th>
+					<th>异常类型</th>
+					<th>流水状态</th>
+					<th>处理时间</th>
+					<th>操作</th>
+					<th>备注</th>
+					<th>操作员</th>
+				</tr>
+			</thead>
+			<tbody id="proofreadErrorBody">
 
-		</tbody>
-	</table>
+			</tbody>
+		</table>
+	</div>
 	<div class="row">
 		<div class="col-md-4">
 
 		</div>
-		<div class="col-md-8">
+		<div class="col-md-8" style="text-align: right;">
 			<ul class="pagination" id="proofreadErrorPage">
 				<!--<li>
 					<a href="javascript:void(0)">«</a>
@@ -176,10 +177,10 @@
 			</ul>
 		</div>
 	</div>
-	</div>
+
 </div>
 <script type="text/javascript">
-	$(function(){
+	$(function() {
 		queryProofreadError(1);
 	});
 	//初始化日期控件 对账日期
@@ -212,6 +213,4 @@
 		};
 		$.queryPage(elements, page);
 	}
-	
-	
 </script>

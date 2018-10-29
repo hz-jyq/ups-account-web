@@ -58,15 +58,15 @@
 				</div>
 			</div>
 	</div>
+	</form>
 	<br />
 	<div class="row">
 		<div class="col-md-12" style="text-align: right;">
 			<button type="button" class="btn btn-success" onclick="queryProofreadResult('1')">搜索</button>
 		</div>
 	</div>
-	</form>
 	<br>
-	<h3>对账异常明细表</h3>
+	<h3>对账文件下载</h3>
 	<br>
 	<div style="width:1000px;overflow-x:auto;">
 		<table class="table table-bordered table-striped table-hover" style="width: 1800px;">
@@ -90,13 +90,14 @@
 
 			</tbody>
 		</table>
-		<div class="row">
-			<div class="col-md-4">
+	</div>
+	<div class="row">
+		<div class="col-md-4">
 
-			</div>
-			<div class="col-md-8">
-				<ul class="pagination" id="proofreadResultPage">
-					<!--<li>
+		</div>
+		<div class="col-md-8" style="text-align: right;">
+			<ul class="pagination" id="proofreadResultPage">
+				<!--<li>
 					<a href="javascript:void(0)">«</a>
 				</li>
 				<li class="active">
@@ -108,8 +109,7 @@
 				<li>
 					<a href="javascript:void(0)">3</a>
 				</li>-->
-				</ul>
-			</div>
+			</ul>
 		</div>
 	</div>
 </div>

@@ -27,7 +27,7 @@
 				</#if>
 			</td>
 			<td>
-				<a>
+				<a onclick="bussinessDownLoad('${proofreadResult.channel!''}','${proofreadResult.fromSystem!''}','${proofreadResult.proofreadType!''}','${proofreadResult.proofreadDate!''})">
 				<#if proofreadResult.fromSystem??>
 					<#if proofreadResult.fromSystem=='01'>
 						美期
@@ -58,7 +58,7 @@
 				</#if>
 			</td>
 			<td>
-				<a>
+				<a onclick="channelDownLoad('${proofreadResult.channel!''}','${proofreadResult.fromSystem!''}','${proofreadResult.proofreadType!''}','${proofreadResult.proofreadDate!''})">
 				<#if proofreadResult.channel??>
 					<#if proofreadResult.channel=='01'>
 						宝付
@@ -91,7 +91,7 @@
 				${proofreadResult.failReason!''}
 			</td>
 			<td>
-				<a>
+				<a onclick="channelDownLoad('${proofreadResult.channel!''}','${proofreadResult.fromSystem!''}','${proofreadResult.proofreadType!''}','${proofreadResult.proofreadDate!''})">
 				<#if proofreadResult.fromSystem??>
 					<#if proofreadResult.fromSystem=='01'>
 						美期
