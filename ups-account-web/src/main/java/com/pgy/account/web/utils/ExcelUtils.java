@@ -45,8 +45,8 @@ public class ExcelUtils {
 
 		if (CollectionUtils.isNotEmpty(list) && ArrayUtils.isNotEmpty(properties)) {
 			int size = list.size();
-			for (int i = 1; i < size; i++) {
-				Row row = sheet.createRow(i);
+			for (int i = 0; i < size; i++) {
+				Row row = sheet.createRow(i+1);
 				for (int j = 0; j < properties.length; j++) {
 					Cell cell = row.createCell(j, Cell.CELL_TYPE_STRING);
 					cell.setCellValue(getFieldValueByName(properties[j],list.get(i)));				

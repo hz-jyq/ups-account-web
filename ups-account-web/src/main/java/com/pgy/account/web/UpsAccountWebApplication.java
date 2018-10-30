@@ -17,9 +17,9 @@ public class UpsAccountWebApplication {
 	private static final Logger logger = LoggerFactory.getLogger(UpsAccountWebApplication.class);
 
 	public static void main(String[] args) {
-		logger.info ("begin to start-up [ups-biz]");
+		logger.info ("begin to start-up [ups-account-web]");
 		SpringApplication.run(UpsAccountWebApplication.class, args);
-		logger.info ("start-up [ups-biz] success !!!");
+		logger.info ("start-up [ups-account-web] success !!!");
 	}	
 
 }
