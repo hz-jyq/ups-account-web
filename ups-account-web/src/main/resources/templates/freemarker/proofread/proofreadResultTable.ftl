@@ -27,7 +27,7 @@
 				</#if>
 			</td>
 			<td>
-				<a href="javascript:void(0)" onclick="businessDownload('${proofreadResult.channel!''}','${proofreadResult.fromSystem!''}','${proofreadResult.proofreadType!''}','${proofreadResult.proofreadDate!''}')">
+				<a href="javascript:void(0)" onclick="businessDownload('${proofreadResult.channel!''}','${proofreadResult.fromSystem!''}','${proofreadResult.proofreadType!''}','${proofreadResult.proofreadDate!''}',this)">
 				<#if proofreadResult.fromSystem??>
 					<#if proofreadResult.fromSystem=='01'>
 						美期
@@ -58,7 +58,7 @@
 				</#if>
 			</td>
 			<td>
-				<a href="javascript:void(0)" onclick="channelDownload('${proofreadResult.channel!''}','${proofreadResult.fromSystem!''}','${proofreadResult.proofreadType!''}','${proofreadResult.proofreadDate!''}')">
+				<a href="javascript:void(0)" onclick="channelDownload('${proofreadResult.channel!''}','${proofreadResult.fromSystem!''}','${proofreadResult.proofreadType!''}','${proofreadResult.proofreadDate!''}',this)">
 				<#if proofreadResult.channel??>
 					<#if proofreadResult.channel=='01'>
 						宝付
@@ -91,7 +91,7 @@
 				${proofreadResult.failReason!''}
 			</td>
 			<td>
-				<a href="javascript:void(0)" onclick="successDownLoad('${proofreadResult.channel!''}','${proofreadResult.fromSystem!''}','${proofreadResult.proofreadType!''}','${proofreadResult.proofreadDate!''}')">
+				<a href="javascript:void(0)" onclick="successDownLoad('${proofreadResult.channel!''}','${proofreadResult.fromSystem!''}','${proofreadResult.proofreadType!''}','${proofreadResult.proofreadDate!''}',this)">
 				<#if proofreadResult.fromSystem??>
 					<#if proofreadResult.fromSystem=='01'>
 						美期
@@ -101,13 +101,7 @@
 						秒呗
 					</#if>
 				</#if>	
-				<#if proofreadResult.proofreadType??>
-					<#if proofreadResult.proofreadType=='01'>
-						借款
-					<#elseif proofreadResult.proofreadType=='02'>
-						还款
-					</#if>
-				</#if>
+				-
 				<#if proofreadResult.channel??>
 					<#if proofreadResult.channel=='01'>
 						宝付
@@ -115,7 +109,13 @@
 						其他
 					</#if>
 				</#if>
-				对账结果
+				<#if proofreadResult.proofreadType??>
+					<#if proofreadResult.proofreadType=='01'>
+						借款对账结果
+					<#elseif proofreadResult.proofreadType=='02'>
+						还款对账结果
+					</#if>
+				</#if>				
 				-
 				${proofreadResult.proofreadDate!''}
 				</a>

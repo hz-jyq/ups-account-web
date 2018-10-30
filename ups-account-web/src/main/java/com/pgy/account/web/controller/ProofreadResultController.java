@@ -96,12 +96,12 @@ public class ProofreadResultController {
 	 * @return
 	 * @throws ParamValidException
 	 */
-	@RequestMapping("/successDownload/{channel}/{fromSystem}/{proofreadType}/{proofreadDate}")
+	@RequestMapping("/successDownload/{channel}/{fromSystem}/{proofreadType}/{proofreadDate}/{fileName}")
 	public void successDownLoad(@PathVariable("channel") String channel, @PathVariable("fromSystem") String fromSystem,
-			@PathVariable("proofreadType") String proofreadType, @PathVariable("proofreadDate") String proofreadDate)
+			@PathVariable("proofreadType") String proofreadType, @PathVariable("proofreadDate") String proofreadDate,@PathVariable("fileName")String fileName)
 			throws ParamValidException {
 
-		if (!ParamUtils.getInstance().notNull(channel, fromSystem, proofreadType, proofreadDate)) {
+		if (!ParamUtils.getInstance().notNull(channel, fromSystem, proofreadType, proofreadDate,fileName)) {
 			throw new ParamValidException("参数不能为空！");
 		}
 		ExcelForm excelForm = new ExcelForm();
@@ -112,10 +112,10 @@ public class ProofreadResultController {
 		List<ProofreadSuccess> list = proofreadSuccessService.getExcelList(excelForm);
 		String[] titles = { "对账日期", "商户号", "业务端", "商户订单号", "渠道订单创建时间", "渠道交易金额", "业务申请时间", "业务交易金额", "借款编号", "对账状态",
 				"备注", "对账员" };
-		String[] properties = { "profreadDate", "businessNum", "fromSystem", "channelOrderCreateTime",
+		String[] properties = { "proofreadDate", "businessNum", "fromSystem", "businessOrderNum","channelOrderCreateTime",
 				"channelExchangeMoney", "businessOrderCreateTime", "businessExchangeMoney", "borrowNum",
 				"proofreadStatus", "remark", "updateUser" };
-		ExcelUtils.outputExcel("", titles, properties, list, response);
+		ExcelUtils.outputExcel(fileName, titles, properties, list, response);
 	}
 
 }

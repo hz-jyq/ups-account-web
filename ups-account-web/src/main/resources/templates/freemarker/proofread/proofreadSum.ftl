@@ -14,7 +14,7 @@
 						</li>
 					</ul>
 				</div>
-				<input type="text" class="form-control">
+				<input type="text" class="form-control" readonly="readonly">
 				<input type="hidden" value="" name="channel">
 			</div>
 			<!--下拉框结束-->
@@ -29,7 +29,7 @@
 						</li>
 					</ul>
 				</div>
-				<input type="text" class="form-control">
+				<input type="text" class="form-control" readonly="readonly">
 				<input type="hidden" value="" name="fromSystem">
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 						</li>
 					</ul>
 				</div>
-				<input type="text" class="form-control">
+				<input type="text" class="form-control" readonly="readonly">
 				<input type="hidden" value="" name="proofreadType">
 			</div>
 		</div>
@@ -81,6 +81,9 @@
 						<button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">对账状态 <span class="caret"></span></button>
 						<ul class="dropdown-menu">
 							<li>
+							   <a href="javascript:void(0)" onclick="sSelect('全部','',this)">全部</a>
+						    </li>
+							<li>
 								<a href="javascript:void(0)" onclick="sSelect('已对账','01',this)">已对账</a>
 							</li>
 							<li>
@@ -91,7 +94,7 @@
 							</li>
 						</ul>
 					</div>
-					<input type="text" class="form-control">
+					<input type="text" class="form-control" readonly="readonly">
 					<input type="hidden" value="" name="proofreadStatus">
 				</div>
 				<!--下拉框结束-->
@@ -103,11 +106,14 @@
 						<button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">对账渠道 <span class="caret"></span></button>
 						<ul class="dropdown-menu">
 							<li>
+							    <a href="javascript:void(0)" onclick="sSelect('全部','',this)">全部</a>
+						    </li>
+							<li>
 								<a href="javascript:void(0)" onclick="sSelect('宝付','01',this)">宝付</a>
 							</li>
 						</ul>
 					</div>
-					<input type="text" class="form-control">
+					<input type="text" class="form-control" readonly="readonly">
 					<input type="hidden" value="" name="channel">
 				</div>
 				<!--下拉框结束-->
@@ -145,11 +151,14 @@
 						<button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">系统<span class="caret"></span></button>
 						<ul class="dropdown-menu">
 							<li>
+							    <a href="javascript:void(0)" onclick="sSelect('全部','',this)">全部</a>
+						    </li>
+							<li>
 								<a href="javascript:void(0)" onclick="sSelect('美期','01',this)">美期</a>
 							</li>
 						</ul>
 					</div>
-					<input type="text" class="form-control">
+					<input type="text" class="form-control" readonly="readonly">
 					<input type="hidden" value="" name="fromSystem">
 				</div>
 			</div>
@@ -158,6 +167,9 @@
 					<div class="input-group-btn">
 						<button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">业务类型<span class="caret"></span></button>
 						<ul class="dropdown-menu">
+						    <li>
+							    <a href="javascript:void(0)" onclick="sSelect('全部','',this)">全部</a>
+						    </li>
 							<li>
 								<a href="javascript:void(0)" onclick="sSelect('借款','01',this)">借款</a>
 							</li>
@@ -166,7 +178,7 @@
 							</li>
 						</ul>
 					</div>
-					<input type="text" class="form-control">
+					<input type="text" class="form-control" readonly="readonly">
 					<input type="hidden" value="" name="proofreadType">
 				</div>
 			</div>
