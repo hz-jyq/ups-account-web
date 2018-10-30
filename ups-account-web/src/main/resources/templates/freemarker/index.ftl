@@ -97,15 +97,19 @@
 		function openTab(linkCode) {
 			$.ajax({
 				url: "/ups-account-web/index/queryTab/" + linkCode,
-				type: "get",
-				async: true,
-				dataType: "html",
+				type: "post",
+				async: false,
+				dataType: "json",
 				cache: false,
 				error: function() {
 					$alert('网络异常，刷新后重试！')
 				},
-				success: function(h) {
-					$("#tabs").empty().html(h);
+				success: function(vo) {
+					if(vo.resultCode!='00'){
+						$alert(vo.message);
+						return;
+					}
+					$("#tabs").empty().html(vo.result.html);
 				}
 			});
 		}
@@ -115,13 +119,17 @@
 			$.ajax({
 				url: linkUrl,
 				type: "post",
-				async: true,
-				dataType: "html",
+				async: false,
+				dataType: "json",
 				error: function() {
 					$alert('网络异常，刷新后重试！')
 				},
-				success: function(h) {
-					$("#" + linkCode).empty().html(h);
+				success: function(vo) {
+					if(vo.resultCode!='00'){
+						$alert(vo.message);
+						return;
+					}
+					$("#"+linkCode).empty().html(vo.result.html);
 				}
 			});
 		}

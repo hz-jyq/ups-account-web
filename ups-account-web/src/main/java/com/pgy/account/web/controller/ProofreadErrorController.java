@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.pgy.account.web.constant.VoCodeConstant;
+import com.pgy.account.web.model.vo.Vo;
 import com.pgy.account.web.utils.FreemarkerUtils;
 import com.pgy.account.web.utils.annotation.ParamsLog;
 import com.pgy.account.web.utils.annotation.RequiredPermission;
@@ -52,25 +54,29 @@ public class ProofreadErrorController {
 	 * @param
 	 * 
 	 */
-
+	@ResponseBody
 	@RequestMapping
-	public String index(ModelMap modelMap) {
-		return "/proofread/proofreadError";
+	public Vo index(ModelMap modelMap) {
+		return new Vo(VoCodeConstant.SUCCESS).putResult("html",
+				freemarkerUtils.getFreemarkerPageToString("/proofread/proofreadError.ftl", null));
 	}
-    
+
 	/**
 	 * 查询异常明细列表
+	 * 
 	 * @param form
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping("/queryProofreadErrorList")
-	public PageInfo<ProofreadError> queryProofreadSumList(ProofreadErrorForm form) {
+	public Vo queryProofreadSumList(ProofreadErrorForm form) {
 		PageInfo<ProofreadError> pageInfo = proofreadErrorService.getPage(form);
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("proofreadErrorList", pageInfo.getList());
-		pageInfo.setHtml(freemarkerUtils.getFreemarkerPageToString("/proofread/proofreadErrorTable.ftl", param));
-		return pageInfo;
+		return new Vo(VoCodeConstant.SUCCESS)
+				.putResult("html",
+						freemarkerUtils.getFreemarkerPageToString("/proofread/proofreadErrorTable.ftl", param))
+				.putResult("total", pageInfo.getTotal());
 	}
 
 }

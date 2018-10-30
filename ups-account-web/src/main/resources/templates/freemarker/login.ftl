@@ -20,14 +20,14 @@
             <div class="container">
                 <input type="text" id="username" class="username" placeholder="Username">
                 <input type="password" id="password" class="password" placeholder="Password">
-                <button onclick="login()">Sign me in</button>
+                <button onclick="login()">登&nbsp;&nbsp;&nbsp;录</button>
             </div>
             <div class="connect">
-                <p>LINK TO</p>
+                <!--<p>LINK TO</p>
                 <p>
                     <a class="facebook" href=""></a>
                     <a class="twitter" href=""></a>
-                </p>
+                </p>-->
             </div>
         </div>
         <br />

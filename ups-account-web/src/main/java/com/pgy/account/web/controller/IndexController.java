@@ -11,13 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pgy.account.web.constant.VoCodeConstant;
 import com.pgy.account.web.exception.ParamValidException;
 import com.pgy.account.web.model.entity.Menu;
 import com.pgy.account.web.model.entity.User;
+import com.pgy.account.web.model.vo.Vo;
 import com.pgy.account.web.service.LoginService;
 import com.pgy.account.web.service.PremissionService;
 import com.pgy.account.web.service.impl.LoginServiceImpl;
@@ -52,7 +55,7 @@ public class IndexController {
 
 	@Resource
 	private PremissionService premissionService;
-	
+
 	/**
 	 * 
 	 * 首页登录
@@ -60,6 +63,7 @@ public class IndexController {
 	 * @param
 	 * 
 	 */
+
 
 	@RequestMapping
 	public String index(ModelMap modelMap) {
@@ -70,7 +74,7 @@ public class IndexController {
 		Set<Menu> menus = premissionService.queryUserMenus(user, 1);
 		modelMap.put("menus", menus);
 		modelMap.put("userName", userName);
-		return "/index";
+		return "index";
 	}
 
 	/**
@@ -81,8 +85,9 @@ public class IndexController {
 	 * @throws ParamValidException
 	 */
 
-	@GetMapping("/queryTab/{linkedCode}")
-	public String queryTab(@PathVariable String linkedCode,ModelMap modelMap) throws ParamValidException {
+	@ResponseBody
+	@PostMapping("/queryTab/{linkedCode}")
+	public Vo queryTab(@PathVariable String linkedCode, ModelMap modelMap) throws ParamValidException {
 		// 查询一级菜单下的二级菜单(选项卡)
 		if (StringUtils.isEmpty(linkedCode)) {
 			throw new ParamValidException("菜单连接编码不能为空！");
@@ -93,14 +98,15 @@ public class IndexController {
 		u.setUserName(userName);
 		// 查询该用户权限下的所有二级菜单（二级菜单为选项卡）
 		Set<Menu> subMenus = premissionService.queryUserMenus(u, 2);
-		//保留父菜单与入参linkedCode相同的二级菜单
-		subMenus=subMenus.stream().filter(tab -> {
+		// 保留父菜单与入参linkedCode相同的二级菜单
+		subMenus = subMenus.stream().filter(tab -> {
 			Menu parentMenu = tab.getParentMenu();
 			return !Objects.isNull(parentMenu) && linkedCode.equals(parentMenu.getLinkCode());
-		}).collect(Collectors.toSet());		
+		}).collect(Collectors.toSet());
 		modelMap.put("subMenus", subMenus);
 		// 渲染页面并返回html文本
-		return "/index/tabs";
+		return new Vo(VoCodeConstant.SUCCESS).putResult("html",
+				freemarkerUtils.getFreemarkerPageToString("/index/tabs.ftl", modelMap));
 	}
 
 }

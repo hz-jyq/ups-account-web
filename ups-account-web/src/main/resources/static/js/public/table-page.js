@@ -19,7 +19,13 @@ $.extend({
 			async: async,
 			data: data,
 			dataType: "json",
-			success: function(result) {
+			success: function(vo) {
+				//登录超时情况
+				if(vo.resultCode!='00'){
+					$alert(vo.message);
+					return;
+				}
+				var result=vo.result;
 				var $tbody = $("#" + dataAreaId);
 				if(paginationId != undefined && paginationId != null && paginationId != "") {
 					var $pagination = $("#" + paginationId);

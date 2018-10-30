@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.pgy.account.web.constant.VoCodeConstant;
 import com.pgy.account.web.exception.ParamValidException;
+import com.pgy.account.web.model.vo.Vo;
 import com.pgy.account.web.utils.ExcelUtils;
 import com.pgy.account.web.utils.FreemarkerUtils;
 import com.pgy.account.web.utils.ParamUtils;
@@ -67,10 +69,11 @@ public class ProofreadResultController {
 	 * @param
 	 * 
 	 */
-
+	@ResponseBody
 	@RequestMapping
-	public String index(ModelMap modelMap) {
-		return "/proofread/proofreadResult";
+	public Vo index(ModelMap modelMap) {
+		return new Vo(VoCodeConstant.SUCCESS).putResult("html",
+				freemarkerUtils.getFreemarkerPageToString("/proofread/proofreadResult.ftl", null));
 	}
 
 	/**
@@ -81,12 +84,14 @@ public class ProofreadResultController {
 	 */
 	@ResponseBody
 	@RequestMapping("/queryProofreadResultList")
-	public PageInfo<ProofreadResult> queryProofreadSumList(ProofreadResultForm form) {
+	public Vo queryProofreadSumList(ProofreadResultForm form) {
 		PageInfo<ProofreadResult> pageInfo = proofreadResultService.getPage(form);
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("proofreadResultList", pageInfo.getList());
-		pageInfo.setHtml(freemarkerUtils.getFreemarkerPageToString("/proofread/proofreadResultTable.ftl", param));
-		return pageInfo;
+		return new Vo(VoCodeConstant.SUCCESS)
+				.putResult("html",
+						freemarkerUtils.getFreemarkerPageToString("/proofread/proofreadResultTable.ftl", param))
+				.putResult("total", pageInfo.getTotal());
 	}
 
 	/**
@@ -98,10 +103,10 @@ public class ProofreadResultController {
 	 */
 	@RequestMapping("/successDownload/{channel}/{fromSystem}/{proofreadType}/{proofreadDate}/{fileName}")
 	public void successDownLoad(@PathVariable("channel") String channel, @PathVariable("fromSystem") String fromSystem,
-			@PathVariable("proofreadType") String proofreadType, @PathVariable("proofreadDate") String proofreadDate,@PathVariable("fileName")String fileName)
-			throws ParamValidException {
+			@PathVariable("proofreadType") String proofreadType, @PathVariable("proofreadDate") String proofreadDate,
+			@PathVariable("fileName") String fileName) throws ParamValidException {
 
-		if (!ParamUtils.getInstance().notNull(channel, fromSystem, proofreadType, proofreadDate,fileName)) {
+		if (!ParamUtils.getInstance().notNull(channel, fromSystem, proofreadType, proofreadDate, fileName)) {
 			throw new ParamValidException("参数不能为空！");
 		}
 		ExcelForm excelForm = new ExcelForm();
@@ -112,9 +117,9 @@ public class ProofreadResultController {
 		List<ProofreadSuccess> list = proofreadSuccessService.getExcelList(excelForm);
 		String[] titles = { "对账日期", "商户号", "业务端", "商户订单号", "渠道订单创建时间", "渠道交易金额", "业务申请时间", "业务交易金额", "借款编号", "对账状态",
 				"备注", "对账员" };
-		String[] properties = { "proofreadDate", "businessNum", "fromSystem", "businessOrderNum","channelOrderCreateTime",
-				"channelExchangeMoney", "businessOrderCreateTime", "businessExchangeMoney", "borrowNum",
-				"proofreadStatus", "remark", "updateUser" };
+		String[] properties = { "proofreadDate", "businessNum", "fromSystem", "businessOrderNum",
+				"channelOrderCreateTime", "channelExchangeMoney", "businessOrderCreateTime", "businessExchangeMoney",
+				"borrowNum", "proofreadStatus", "remark", "updateUser" };
 		ExcelUtils.outputExcel(fileName, titles, properties, list, response);
 	}
 
