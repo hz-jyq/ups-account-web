@@ -39,19 +39,19 @@
 				${proofreadSum.proofreadDate!''}
 			</td>
 			<td>
-				${proofreadSum.businessTotalMoney!''}/${proofreadSum.businessTotal!''}
+				${proofreadSum.businessTotalMoney!''}元/${proofreadSum.businessTotal!''}笔
 			</td>
 			<td>
-				${proofreadSum.channelTotalMoney!''}/${proofreadSum.channelTotal!''}
+				${proofreadSum.channelTotalMoney!''}元/${proofreadSum.channelTotal!''}笔
 			</td>
 			<td>
-				${proofreadSum.successTotalMoney!''}/${proofreadSum.successTotal!''}
+				${proofreadSum.successTotalMoney!''}元/${proofreadSum.successTotal!''}笔
 			</td>
 			<td>
-				${proofreadSum.channelFailTotalMoney!''}/${proofreadSum.channelFailTotal!''}
+				${proofreadSum.channelFailTotalMoney!''}元/${proofreadSum.channelFailTotal!''}笔
 			</td>
 			<td>
-				${proofreadSum.businessFailTotalMoney!''}/${proofreadSum.businessFailTotal!''}
+				${proofreadSum.businessFailTotalMoney!''}元/${proofreadSum.businessFailTotal!''}笔
 			</td>
 			<td>
 				<#if proofreadSum.proofreadStatus??>
