@@ -8,11 +8,12 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.alibaba.dubbo.common.utils.CollectionUtils;
+
 import com.pgy.account.web.dao.MenuDao;
 import com.pgy.account.web.dao.RoleDao;
 import com.pgy.account.web.dao.UserDao;
