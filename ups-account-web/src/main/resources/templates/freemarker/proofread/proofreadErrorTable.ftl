@@ -33,7 +33,34 @@
 				${proofreadError.businessExchangeMoney!''}
 			</td>
 			<td>
-				${proofreadError.businessOrderStatuts!''}
+				<#if proofreadError.proofreadType??&&proofreadError.businessOrderStatuts??>
+					<#if proofreadError.proofreadType=='01'>
+						<#if proofreadError.businessOrderStatuts=='0'>
+							申请-未审核
+						<#elseif proofreadError.businessOrderStatuts=='1'>
+							已结清
+						<#elseif proofreadError.businessOrderStatuts=='2'>
+							打款中
+						<#elseif proofreadError.businessOrderStatuts=='3'>
+							打款失败
+						<#elseif proofreadError.businessOrderStatuts=='4'>
+							关闭
+						<#elseif proofreadError.businessOrderStatuts=='5'>
+							已经打款-待还款
+						</#if>
+					<#elseif proofreadError.proofreadType=='02'>
+						<#if proofreadError.businessOrderStatuts=='0'>
+							新建状态
+						<#elseif proofreadError.businessOrderStatuts=='1'>
+							成功
+						<#elseif proofreadError.businessOrderStatuts=='2'>
+							处理中
+						<#elseif proofreadError.businessOrderStatuts=='3'>
+							失败
+	                    </#if>							
+					</#if>
+				</#if>
+		<!--		${proofreadError.businessOrderStatuts!''}-->
 			</td>
 			<td>
 				${proofreadError.businessOrderCreateTime!''}

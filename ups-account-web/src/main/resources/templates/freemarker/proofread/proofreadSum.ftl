@@ -247,6 +247,7 @@
 		language: "zh-CN",
 		format: 'yyyy-mm-dd hh:ii:ss', //显示格式
 		todayHighlight: 1, //今天高亮
+		minView: "hour",
 		autoclose: true,
 		todayBtn: true
 	});
