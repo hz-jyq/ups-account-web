@@ -46,6 +46,7 @@ public class RedisUtils {
     public boolean delete(String key) {
     	Jedis jedis=jedisPool.getResource(); 
     	Long result=jedis.del(key);
+    	jedis.close();
     	return result>0;
     }
     
