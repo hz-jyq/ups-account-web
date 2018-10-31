@@ -31,6 +31,7 @@ public class RedisUtils {
     public String get(String key) {
     	Jedis jedis=jedisPool.getResource(); 
     	String value=jedis.get(key);
+    	jedis.resetState();
     	jedis.close();
     	return  value;
     }

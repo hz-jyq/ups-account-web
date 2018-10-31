@@ -24,15 +24,19 @@ public class RedisConfiguration {
     @Value("${redis.config.password}")
     private String password;
     
+    @Value("${redis.config.maxWaitMillis}")
+    private Integer maxWaitMillis;
+    
 	@Bean
-	public JedisPool getJedis(JedisPoolConfig jedisPoolConfig) {
-			     	        
+	public JedisPool getJedis(JedisPoolConfig jedisPoolConfig) {			     	        
 		return new JedisPool(jedisPoolConfig,host,port,timeout,password);
 	}
 	
 	@Bean
 	public JedisPoolConfig getJedisPoolConfig() { 
 		JedisPoolConfig jedisPoolConfig = new JedisPoolConfig(); 
+		jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
+		jedisPoolConfig.setTestOnBorrow(true);
 		return jedisPoolConfig;
 	}
 }
