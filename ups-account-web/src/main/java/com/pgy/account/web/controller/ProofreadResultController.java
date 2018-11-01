@@ -25,6 +25,7 @@ import com.pgy.account.web.utils.FreemarkerUtils;
 import com.pgy.account.web.utils.ParamUtils;
 import com.pgy.account.web.utils.annotation.ParamsLog;
 import com.pgy.account.web.utils.annotation.RequiredPermission;
+import com.pgy.ups.account.commom.annotation.PrintExecuteTime;
 import com.pgy.ups.account.facade.dubbo.api.BaofuBorrowDataService;
 import com.pgy.ups.account.facade.dubbo.api.BaofuReturnDataService;
 import com.pgy.ups.account.facade.dubbo.api.ProofreadErrorService;
@@ -125,6 +126,7 @@ public class ProofreadResultController {
 	 * @return
 	 * @throws ParamValidException
 	 */
+	@PrintExecuteTime
 	@RequestMapping("/successDownload/{channel}/{fromSystem}/{proofreadType}/{proofreadDate}/{fileName}")
 	public void successDownLoad(@PathVariable("channel") String channel, @PathVariable("fromSystem") String fromSystem,
 			@PathVariable("proofreadType") String proofreadType, @PathVariable("proofreadDate") String proofreadDate,
@@ -146,7 +148,7 @@ public class ProofreadResultController {
 		String[] successProperties = { "proofreadDate", "businessNum", "fromSystem", "businessOrderNum",
 				"channelOrderCreateTime", "channelExchangeMoney", "businessOrderCreateTime", "businessExchangeMoney",
 				"borrowNum", "proofreadStatus", "remark", "updateUser" };
-		XSSFWorkbook workbook = ExcelUtils.generateExcel2007("对账成功", successTitles, successProperties, successList,
+		XSSFWorkbook workbook = ExcelUtils.getIntance().generateExcel2007("对账成功", successTitles, successProperties, successList,
 				null);
 		// 创建失败对账列表文件
 		List<ProofreadError> errorList = proofreadErrorService.getExcelList(excelForm);
@@ -155,9 +157,9 @@ public class ProofreadResultController {
 		String[] errorProperties = { "proofreadDate", "fromSystem", "proofreadType","businessOrderNum", "borrowNum", "businessExchangeMoney",
 				"businessOrderStatuts", "businessOrderCreateTime", "channelExchangeMoney", "channelOrderStatus",
 				"channelOrderCreateTime", "errorType", "flowStatus", "disposeTime", "updateUser" };
-		workbook = ExcelUtils.generateExcel2007("对账异常", errorTitles, errorProperties, errorList, workbook);
+		workbook = ExcelUtils.getIntance().generateExcel2007("对账异常", errorTitles, errorProperties, errorList, workbook);
 		// 输出excel文件
-		ExcelUtils.printOutExcel(workbook, response, fileName);
+		ExcelUtils.getIntance().printOutExcel(workbook, response, fileName);
 	}
 
 	/**
@@ -170,6 +172,7 @@ public class ProofreadResultController {
 	 * @param fileName
 	 * @throws ParamValidException
 	 */
+	@PrintExecuteTime
 	@RequestMapping("/channelDownload/{channel}/{fromSystem}/{proofreadType}/{proofreadDate}/{fileName}")
 	public void channelDownload(@PathVariable("channel") String channel, @PathVariable("fromSystem") String fromSystem,
 			@PathVariable("proofreadType") String proofreadType, @PathVariable("proofreadDate") String proofreadDate,
@@ -204,8 +207,8 @@ public class ProofreadResultController {
 					"orderStatus", "exchangeAmount", "exchangeTip", "baofuExchangeNum", "orderCreateTime",
 					"businessRefundOrderNum", "refundOrderCreateTime" };
 		}
-		XSSFWorkbook workbook = ExcelUtils.generateExcel2007(fileName, titles, properties, list, null);
-		ExcelUtils.printOutExcel(workbook, response, fileName);
+		XSSFWorkbook workbook = ExcelUtils.getIntance().generateExcel2007(fileName, titles, properties, list, null);
+		ExcelUtils.getIntance().printOutExcel(workbook, response, fileName);
 	}
 
 }

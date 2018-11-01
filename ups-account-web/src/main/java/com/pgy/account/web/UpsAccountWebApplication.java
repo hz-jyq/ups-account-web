@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * UPS账务WEB系统启动
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 
 @SpringBootApplication
+@ComponentScan("com.pgy.account.**,com.pgy.ups.account.commom.**")
 public class UpsAccountWebApplication {
 
 	private static final Logger logger = LoggerFactory.getLogger(UpsAccountWebApplication.class);

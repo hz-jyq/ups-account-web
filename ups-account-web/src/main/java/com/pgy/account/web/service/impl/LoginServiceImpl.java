@@ -17,7 +17,8 @@ import com.pgy.account.web.model.entity.User;
 import com.pgy.account.web.service.LoginService;
 import com.pgy.account.web.utils.BussinessUtils;
 import com.pgy.account.web.utils.CookieUtils;
-import com.pgy.account.web.utils.RedisUtils;
+import com.pgy.ups.account.commom.utils.RedisUtils;
+
 
 @Component
 @ConfigurationProperties
@@ -38,9 +39,7 @@ public class LoginServiceImpl implements LoginService{
      
 	@Resource
 	private UserDao userDao;
-	
-	@Resource
-	private RedisUtils redisUtils;
+
 	
 	/**
 	 * 验证用户密码是否可以登录
@@ -61,6 +60,7 @@ public class LoginServiceImpl implements LoginService{
      * @return
      */
 	public boolean verifyLoginTimeOver(User user) {
+		RedisUtils redisUtils=RedisUtils.getInstance();
 		String count=redisUtils.get(user.getUserName()+LONGIN_COUNT);
 		if(!StringUtils.isNumeric(count)) {
 			return !redisUtils.setex(user.getUserName()+LONGIN_COUNT, "1",60);
@@ -81,6 +81,7 @@ public class LoginServiceImpl implements LoginService{
 	public boolean saveLogin(User user, HttpServletResponse response) {
 		String token=BussinessUtils.getLoginToken();	
 		//存入redis成功后，和用户信息一起保存至cookie中
+		RedisUtils redisUtils=RedisUtils.getInstance();
 		if(redisUtils.setex(user.getUserName()+LONGIN_TOKEN, token, 1800)){
 			CookieUtils.setCookie(response, user.getUserName()+LONGIN_TOKEN, token, loginTimeOut);
 			CookieUtils.setCookie(response, USER_NAME, user.getUserName(), loginTimeOut);
@@ -102,6 +103,7 @@ public class LoginServiceImpl implements LoginService{
 			return false;
 		}
 		//查询redis中是否有token
+		RedisUtils redisUtils=RedisUtils.getInstance();
 		String loginToken=redisUtils.get(userName+LONGIN_TOKEN);
 		if(StringUtils.isEmpty(loginToken)) {
 			return false;
@@ -112,6 +114,7 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 	public void loginOut(HttpServletRequest request,HttpServletResponse response) {
+		RedisUtils redisUtils=RedisUtils.getInstance();
 		String userName=CookieUtils.getCookieValue(request, USER_NAME);
 		if(StringUtils.isEmpty(userName)) {
 			return;

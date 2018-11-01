@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
+import com.pgy.ups.account.commom.utils.SpringUtils;
+
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
 
@@ -27,6 +29,10 @@ public class FreemarkerUtils {
 			logger.error("freemrker模板渲染异常{}", e);
 			return null;
 		}
+	}
+	
+	public static FreemarkerUtils getInstance() {
+		return SpringUtils.getBean(FreemarkerUtils.class);
 	}
 
 }
