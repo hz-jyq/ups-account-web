@@ -52,7 +52,7 @@
 	
     
     
-    <!-- 根据用户名密码查询用户-->
+  
 	<select id="queryMenu" resultMap="menuMap" >
 		SELECT 
 		   <include refid="menuColumn" />,
