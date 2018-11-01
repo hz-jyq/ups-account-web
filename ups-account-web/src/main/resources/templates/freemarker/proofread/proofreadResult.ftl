@@ -156,6 +156,7 @@
 	//渠道数据下载
 	function channelDownload(channel,fromSystem,proofreadType,proofreadDate,e){
 		var fileName=$(e).text().trim();
+		window.location.href="/ups-account-web/proofreadResult/channelDownload/"+channel+"/"+fromSystem+"/"+proofreadType+"/"+proofreadDate+"/"+fileName;
 	}
 	
 	//对账成功数据下载

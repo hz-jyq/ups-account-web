@@ -10,12 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.curator.shaded.com.google.common.collect.Maps;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.pgy.account.web.exception.ParamValidException;
 
 public class ParamUtils {
 
-	private Logger logger = LoggerFactory.getLogger(ParamUtils.class);
 
 	private static ParamUtils paramUtils = new ParamUtils();
 
@@ -82,29 +81,25 @@ public class ParamUtils {
 	/**
 	 * 参数不能有null
 	 * 
-	 * @param param
+	 * @param params
 	 * @return
+	 * @throws ParamValidException 
 	 */
 	@SuppressWarnings("rawtypes")
-	public boolean notNull(Object... params) {
+	public void assertNotNull(Object... params) throws ParamValidException {
 		for (int i = 0; i < params.length; i++) {
 			if (Objects.isNull(params[i])) {
-				logger.error("第" + i + "个参数为null");
-				return false;
+				throw new ParamValidException("第" + i + "个参数为空字符串");		
 			}
 			if (params[i] instanceof String && (StringUtils.isEmpty(params[i].toString()))) {
-				logger.error("第" + i + "个参数为空字符串");
-				return false;
+				throw new ParamValidException("第" + i + "个参数为空字符串");		
 			}
 			if (params[i] instanceof Collection && ((Collection) params[i]).isEmpty()) {
-				logger.error("第" + i + "个参数为空集合");
-				return false;
+				throw new ParamValidException("第" + i + "个参数为空集合");		
 			}
 			if (params[i] instanceof Map && ((Map) params[i]).isEmpty()) {
-				logger.error("第" + i + "个参数为空map");
-				return false;
+				throw new ParamValidException("第" + i + "个参数为空map");		
 			}
 		}
-		return true;
 	}
 }
