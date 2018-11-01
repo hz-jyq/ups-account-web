@@ -18,7 +18,8 @@ import com.pgy.account.web.exception.ParamValidException;
 import com.pgy.account.web.model.entity.User;
 import com.pgy.account.web.model.vo.Vo;
 import com.pgy.account.web.service.LoginService;
-import com.pgy.account.web.utils.annotation.ParamsLog;
+import com.pgy.ups.account.commom.annotation.ParamsLog;
+
 
 
 /**

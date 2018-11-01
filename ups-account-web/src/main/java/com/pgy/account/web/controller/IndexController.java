@@ -26,8 +26,8 @@ import com.pgy.account.web.service.PremissionService;
 import com.pgy.account.web.service.impl.LoginServiceImpl;
 import com.pgy.account.web.utils.CookieUtils;
 import com.pgy.account.web.utils.FreemarkerUtils;
-import com.pgy.account.web.utils.annotation.ParamsLog;
 import com.pgy.account.web.utils.annotation.RequiredPermission;
+import com.pgy.ups.account.commom.annotation.ParamsLog;
 
 /**
  * 首页登录
