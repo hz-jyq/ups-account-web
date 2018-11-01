@@ -146,7 +146,7 @@ public class ProofreadResultController {
 		String[] successProperties = { "proofreadDate", "businessNum", "fromSystem", "businessOrderNum",
 				"channelOrderCreateTime", "channelExchangeMoney", "businessOrderCreateTime", "businessExchangeMoney",
 				"borrowNum", "proofreadStatus", "remark", "updateUser" };
-		XSSFWorkbook workbook = ExcelUtils.generateExcel2003("对账成功", successTitles, successProperties, successList,
+		XSSFWorkbook workbook = ExcelUtils.generateExcel2007("对账成功", successTitles, successProperties, successList,
 				null);
 		// 创建失败对账列表文件
 		List<ProofreadError> errorList = proofreadErrorService.getExcelList(excelForm);
@@ -155,7 +155,7 @@ public class ProofreadResultController {
 		String[] errorProperties = { "proofreadDate", "fromSystem", "proofreadType","businessOrderNum", "borrowNum", "businessExchangeMoney",
 				"businessOrderStatuts", "businessOrderCreateTime", "channelExchangeMoney", "channelOrderStatus",
 				"channelOrderCreateTime", "errorType", "flowStatus", "disposeTime", "updateUser" };
-		workbook = ExcelUtils.generateExcel2003("对账异常", errorTitles, errorProperties, errorList, workbook);
+		workbook = ExcelUtils.generateExcel2007("对账异常", errorTitles, errorProperties, errorList, workbook);
 		// 输出excel文件
 		ExcelUtils.printOutExcel(workbook, response, fileName);
 	}
@@ -204,7 +204,7 @@ public class ProofreadResultController {
 					"orderStatus", "exchangeAmount", "exchangeTip", "baofuExchangeNum", "orderCreateTime",
 					"businessRefundOrderNum", "refundOrderCreateTime" };
 		}
-		XSSFWorkbook workbook = ExcelUtils.generateExcel2003(fileName, titles, properties, list, null);
+		XSSFWorkbook workbook = ExcelUtils.generateExcel2007(fileName, titles, properties, list, null);
 		ExcelUtils.printOutExcel(workbook, response, fileName);
 	}
 

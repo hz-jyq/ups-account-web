@@ -26,7 +26,7 @@ public class ExcelUtils {
 
 	private static Logger logger = LoggerFactory.getLogger(ExcelUtils.class);
 
-	public static XSSFWorkbook generateExcel2003(String sheetName, String[] titles, String[] properties, List<?> list,
+	public static XSSFWorkbook generateExcel2007(String sheetName, String[] titles, String[] properties, List<?> list,
 			XSSFWorkbook workbook) {
 		// 默认文件名为unknown
 		sheetName = StringUtils.isEmpty(sheetName) ? "unknown" : sheetName;
