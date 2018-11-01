@@ -27,6 +27,7 @@ import com.pgy.account.web.utils.annotation.ParamsLog;
 import com.pgy.account.web.utils.annotation.RequiredPermission;
 import com.pgy.ups.account.facade.dubbo.api.BaofuBorrowDataService;
 import com.pgy.ups.account.facade.dubbo.api.BaofuReturnDataService;
+import com.pgy.ups.account.facade.dubbo.api.ProofreadErrorService;
 import com.pgy.ups.account.facade.dubbo.api.ProofreadResultService;
 import com.pgy.ups.account.facade.dubbo.api.ProofreadSuccessService;
 import com.pgy.ups.account.facade.dubbo.api.ProofreadSumService;
@@ -81,6 +82,9 @@ public class ProofreadResultController {
 
 	@Reference(timeout = 10000)
 	private BaofuReturnDataService baofuReturnDateService;
+	
+	@Reference(timeout = 10000)
+	private ProofreadErrorService proofreadErrorService;
 
 	/**
 	 * 
@@ -145,10 +149,10 @@ public class ProofreadResultController {
 		XSSFWorkbook workbook = ExcelUtils.generateExcel2003("对账成功", successTitles, successProperties, successList,
 				null);
 		// 创建失败对账列表文件
-		List<ProofreadError> errorList = null;
-		String[] errorTitles = { "对账日期", "业务类型", "商户订单号", "借款编号", "业务交易金额", "业务状态", "业务申请时间", "渠道交易金额", "渠道订单状态",
+		List<ProofreadError> errorList = proofreadErrorService.getExcelList(excelForm);
+		String[] errorTitles = { "对账日期", "业务名称","业务类型", "商户订单号", "借款编号", "业务交易金额", "业务状态", "业务申请时间", "渠道交易金额", "渠道订单状态",
 				"渠道交易时间", "异常类型", "流水状态", "处理时间", "操作员" };
-		String[] errorProperties = { "proofreadDate", "", "businessOrderNum", "borrowNum", "businessExchangeMoney",
+		String[] errorProperties = { "proofreadDate", "fromSystem", "proofreadType","businessOrderNum", "borrowNum", "businessExchangeMoney",
 				"businessOrderStatuts", "businessOrderCreateTime", "channelExchangeMoney", "channelOrderStatus",
 				"channelOrderCreateTime", "errorType", "flowStatus", "disposeTime", "updateUser" };
 		workbook = ExcelUtils.generateExcel2003("对账异常", errorTitles, errorProperties, errorList, workbook);

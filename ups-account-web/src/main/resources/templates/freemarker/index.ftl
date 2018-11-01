@@ -14,7 +14,7 @@
 	<script src="static/js/jquery-3.2.1.min.js"></script>
 	<script src="static/plugin/bootstrap3.3.7/js/bootstrap.min.js"></script>
 	<script src="static/plugin/bootstrap3.3.7/js/bootstrap-datetimepicker.min.js"></script>
-	<script src="http://bootboxjs.com/bootbox.js"></script>
+	<script src="static/plugin/bootstrap3.3.7/js/bootbox.min.js"></script>
 	<script type="text/javascript" src="static/js/public/public.js"></script>
 	<script type="text/javascript" src="static/js/public/table-page.js"></script>
 	<style type="text/css">

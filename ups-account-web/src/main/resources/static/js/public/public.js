@@ -5,7 +5,7 @@ $.extend({
 	}
 });
 //弹窗
-function $alert(message,f) {
+function $alert(message, f) {
 	bootbox.alert({
 		buttons: {
 			ok: {
@@ -15,14 +15,20 @@ function $alert(message,f) {
 		},
 		title: "提示！",
 		message: message,
-		callback: f		
+		callback: f
 	});
 }
+
+function $popDownloadWin() {
+	var $dialog = bootbox.dialog({
+		message: '<p class="text-center">正在下载，请稍后...</p>',
+		closeButton: true
+	});
+	return $dialog;
+}
 //自动选择下拉框
-function sSelect(name,value,e){
-    var thisName=$(e).text();
+function sSelect(name, value, e) {
+	var thisName = $(e).text();
 	$(e).parent().parent().parent().next().val(name);
 	$(e).parent().parent().parent().next().next().val(value);
 };
-
-
