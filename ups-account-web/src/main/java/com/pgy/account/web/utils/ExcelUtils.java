@@ -53,7 +53,6 @@ public class ExcelUtils {
 			for (int i = 0; i < titles.length; i++) {
 				Cell cell = row0.createCell(i, Cell.CELL_TYPE_STRING);
 				cell.setCellValue(titles[i]);
-				sheet.autoSizeColumn(i);
 			}
 		}
 
@@ -71,10 +70,14 @@ public class ExcelUtils {
 				for (int j = 0; j < properties.length; j++) {
 					Cell cell = row.createCell(j, Cell.CELL_TYPE_STRING);
 					cell.setCellValue(getStringResult(getMethodList.get(j), list.get(i)));
-				}
-				sheet.autoSizeColumn(i);
+				}				
 			}
 		}
+		//最终格式化  拖慢速度
+		/*for(int i=0;i<properties.length;i++) {
+			sheet.autoSizeColumn(i);
+		}*/
+		
 		return workbook;
 	}
 
@@ -121,7 +124,7 @@ public class ExcelUtils {
 		String getter = "get" + firstLetter + fieldName.substring(1);
 		for (Class<?> c = clazz; c != Object.class; c = c.getSuperclass()) {
 			try {
-				Method method = clazz.getDeclaredMethod(getter);
+				Method method = clazz.getMethod(getter);
 				return method;
 			} catch (Exception e) {
 				// 不做任何处理 否则会跳出循环
