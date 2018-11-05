@@ -48,6 +48,7 @@ $.extend({
 				if(page > maxPage) {
 					page = maxPage;
 				}
+				page=parseInt(page);
 				var param = JSON.stringify(elements);
 				$pagination.append("<li><a href='javascript:void(0)' onclick='$.queryPage(" + param + ",1)'>首页</a><li>");
 				if(page == 1) {
