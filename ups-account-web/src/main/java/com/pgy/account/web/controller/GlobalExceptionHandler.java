@@ -18,10 +18,8 @@ import com.pgy.account.web.model.vo.Vo;
  * Controller捕获异常统一处理
  * 
  * @description TODO
- * @author chen.gs
- * @create date 2016年4月28日
- * @modified by
- * @modify date
+ * @author 墨凉
+ * @create date 2018年11月7日
  * @version v1.0
  */
 @ControllerAdvice
