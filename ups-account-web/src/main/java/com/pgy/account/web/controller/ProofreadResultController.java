@@ -24,8 +24,6 @@ import com.pgy.account.web.utils.ExcelUtils;
 import com.pgy.account.web.utils.FreemarkerUtils;
 
 import com.pgy.account.web.utils.annotation.RequiredPermission;
-import com.pgy.ups.account.commom.annotation.ParamsLog;
-import com.pgy.ups.account.commom.annotation.PrintExecuteTime;
 import com.pgy.ups.account.facade.dubbo.api.BaofuBorrowDataService;
 import com.pgy.ups.account.facade.dubbo.api.BaofuReturnDataService;
 import com.pgy.ups.account.facade.dubbo.api.ProofreadErrorService;
@@ -38,6 +36,8 @@ import com.pgy.ups.account.facade.from.ProofreadResultForm;
 import com.pgy.ups.account.facade.model.proofread.ProofreadError;
 import com.pgy.ups.account.facade.model.proofread.ProofreadResult;
 import com.pgy.ups.account.facade.model.proofread.ProofreadSuccess;
+import com.pgy.ups.common.annotation.ParamsLog;
+import com.pgy.ups.common.annotation.PrintExecuteTime;
 import com.pgy.ups.common.exception.ParamValidException;
 import com.pgy.ups.common.utils.ParamUtils;
 

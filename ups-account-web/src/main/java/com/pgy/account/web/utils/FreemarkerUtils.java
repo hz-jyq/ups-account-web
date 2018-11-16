@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
-import com.pgy.ups.account.commom.utils.SpringUtils;
+import com.pgy.ups.common.utils.SpringUtils;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;

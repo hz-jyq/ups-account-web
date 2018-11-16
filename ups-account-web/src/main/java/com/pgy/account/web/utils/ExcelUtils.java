@@ -24,8 +24,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.util.IOUtils;
-import com.pgy.ups.account.commom.annotation.PrintExecuteTime;
-import com.pgy.ups.account.commom.utils.SpringUtils;
+import com.pgy.ups.common.annotation.PrintExecuteTime;
+import com.pgy.ups.common.utils.SpringUtils;
+
 
 @Component
 public class ExcelUtils {

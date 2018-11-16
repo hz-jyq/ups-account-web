@@ -27,7 +27,7 @@ import com.pgy.account.web.service.impl.LoginServiceImpl;
 
 import com.pgy.account.web.utils.FreemarkerUtils;
 import com.pgy.account.web.utils.annotation.RequiredPermission;
-import com.pgy.ups.account.commom.annotation.ParamsLog;
+import com.pgy.ups.common.annotation.ParamsLog;
 import com.pgy.ups.common.exception.ParamValidException;
 import com.pgy.ups.common.utils.CookieUtils;
 

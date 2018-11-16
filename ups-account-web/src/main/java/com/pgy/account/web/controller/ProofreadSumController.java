@@ -17,11 +17,11 @@ import com.pgy.account.web.constant.VoCodeConstant;
 import com.pgy.account.web.model.vo.Vo;
 import com.pgy.account.web.utils.FreemarkerUtils;
 import com.pgy.account.web.utils.annotation.RequiredPermission;
-import com.pgy.ups.account.commom.annotation.ParamsLog;
 import com.pgy.ups.account.facade.dubbo.api.ProofreadSumService;
 import com.pgy.ups.account.facade.from.PageInfo;
 import com.pgy.ups.account.facade.from.ProofreadSumForm;
 import com.pgy.ups.account.facade.model.proofread.ProofreadSum;
+import com.pgy.ups.common.annotation.ParamsLog;
 
 /**
  * 对账汇总登录
