@@ -17,7 +17,8 @@ import com.pgy.account.web.exception.BussinessException;
 import com.pgy.account.web.model.entity.User;
 import com.pgy.account.web.service.impl.LoginServiceImpl;
 import com.pgy.account.web.service.impl.PremissionServiceImpl;
-import com.pgy.account.web.utils.CookieUtils;
+import com.pgy.ups.common.utils.CookieUtils;
+
 
 /**
   *  权限拦截

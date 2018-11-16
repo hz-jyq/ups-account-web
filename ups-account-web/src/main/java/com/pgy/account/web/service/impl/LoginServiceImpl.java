@@ -12,12 +12,14 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.dubbo.common.utils.StringUtils;
 import com.pgy.account.web.dao.UserDao;
-import com.pgy.account.web.exception.ParamValidException;
+
 import com.pgy.account.web.model.entity.User;
 import com.pgy.account.web.service.LoginService;
 import com.pgy.account.web.utils.BussinessUtils;
-import com.pgy.account.web.utils.CookieUtils;
+
 import com.pgy.ups.account.commom.utils.RedisUtils;
+import com.pgy.ups.common.exception.ParamValidException;
+import com.pgy.ups.common.utils.CookieUtils;
 
 
 @Component

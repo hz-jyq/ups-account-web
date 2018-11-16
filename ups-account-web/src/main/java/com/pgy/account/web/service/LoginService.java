@@ -3,8 +3,9 @@ package com.pgy.account.web.service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pgy.account.web.exception.ParamValidException;
+
 import com.pgy.account.web.model.entity.User;
+import com.pgy.ups.common.exception.ParamValidException;
 
 public interface LoginService {
 

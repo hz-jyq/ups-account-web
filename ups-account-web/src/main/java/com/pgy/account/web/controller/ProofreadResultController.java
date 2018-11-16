@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.pgy.account.web.constant.VoCodeConstant;
-import com.pgy.account.web.exception.ParamValidException;
+
 import com.pgy.account.web.model.vo.Vo;
 import com.pgy.account.web.utils.ExcelUtils;
 import com.pgy.account.web.utils.FreemarkerUtils;
-import com.pgy.account.web.utils.ParamUtils;
+
 import com.pgy.account.web.utils.annotation.RequiredPermission;
 import com.pgy.ups.account.commom.annotation.ParamsLog;
 import com.pgy.ups.account.commom.annotation.PrintExecuteTime;
@@ -38,6 +38,8 @@ import com.pgy.ups.account.facade.from.ProofreadResultForm;
 import com.pgy.ups.account.facade.model.proofread.ProofreadError;
 import com.pgy.ups.account.facade.model.proofread.ProofreadResult;
 import com.pgy.ups.account.facade.model.proofread.ProofreadSuccess;
+import com.pgy.ups.common.exception.ParamValidException;
+import com.pgy.ups.common.utils.ParamUtils;
 
 /**
  * 对账结果
@@ -133,7 +135,7 @@ public class ProofreadResultController {
 			@PathVariable("fileName") String fileName) throws ParamValidException {
 
 		// 验证参数不能为空
-		ParamUtils.getInstance().assertNotNull(channel, fromSystem, proofreadType, proofreadDate, fileName);
+		ParamUtils.assertNotNull(channel, fromSystem, proofreadType, proofreadDate, fileName);
 		// 封装参数
 		ExcelForm excelForm = new ExcelForm();
 		excelForm.setChannel(channel);
@@ -179,7 +181,7 @@ public class ProofreadResultController {
 			@PathVariable("fileName") String fileName) throws ParamValidException {
 
 		// 验证参数不能为空
-		ParamUtils.getInstance().assertNotNull(channel, fromSystem, proofreadType, proofreadDate, fileName);
+		ParamUtils.assertNotNull(channel, fromSystem, proofreadType, proofreadDate, fileName);
 		// 封装参数
 		ExcelForm excelForm = new ExcelForm();
 		excelForm.setChannel(channel);

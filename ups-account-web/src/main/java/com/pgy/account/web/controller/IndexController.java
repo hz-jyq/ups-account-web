@@ -17,17 +17,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pgy.account.web.constant.VoCodeConstant;
-import com.pgy.account.web.exception.ParamValidException;
+
 import com.pgy.account.web.model.entity.Menu;
 import com.pgy.account.web.model.entity.User;
 import com.pgy.account.web.model.vo.Vo;
 import com.pgy.account.web.service.LoginService;
 import com.pgy.account.web.service.PremissionService;
 import com.pgy.account.web.service.impl.LoginServiceImpl;
-import com.pgy.account.web.utils.CookieUtils;
+
 import com.pgy.account.web.utils.FreemarkerUtils;
 import com.pgy.account.web.utils.annotation.RequiredPermission;
 import com.pgy.ups.account.commom.annotation.ParamsLog;
+import com.pgy.ups.common.exception.ParamValidException;
+import com.pgy.ups.common.utils.CookieUtils;
 
 /**
  * 首页登录
