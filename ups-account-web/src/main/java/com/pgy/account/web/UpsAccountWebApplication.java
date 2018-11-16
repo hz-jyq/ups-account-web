@@ -13,7 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 
 @SpringBootApplication
-@ComponentScan("com.pgy.account.**,com.pgy.ups.**")
+@ComponentScan("com.pgy.ups.common.**,com.pgy.account.web.**")
 public class UpsAccountWebApplication {
 
 	private static final Logger logger = LoggerFactory.getLogger(UpsAccountWebApplication.class);

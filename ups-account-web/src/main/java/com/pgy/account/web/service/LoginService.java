@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.pgy.account.web.model.entity.User;
 import com.pgy.ups.common.exception.ParamValidException;
 
+
 public interface LoginService {
 
 	boolean verifyLoginTimeOver(User user) throws ParamValidException ;
