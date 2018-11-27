@@ -26,9 +26,3 @@ function $popDownloadWin() {
 	});
 	return $dialog;
 }
-//自动选择下拉框
-function sSelect(name, value, e) {
-	var thisName = $(e).text();
-	$(e).parent().parent().parent().next().val(name);
-	$(e).parent().parent().parent().next().next().val(value);
-};

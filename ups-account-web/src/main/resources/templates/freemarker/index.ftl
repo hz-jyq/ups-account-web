@@ -1,6 +1,5 @@
-<!doctype html>
-
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 	<head>
 		<!-- Required meta tags -->
@@ -17,76 +16,65 @@
 	<script src="static/plugin/bootstrap3.3.7/js/bootbox.min.js"></script>
 	<script type="text/javascript" src="static/js/public/public.js"></script>
 	<script type="text/javascript" src="static/js/public/table-page.js"></script>
-	<style type="text/css">
-		body {
-			padding: 20px;
-		}
-		
-		.headLeft {
-			float: left;
-		}
-		
-		.headRight {
-			padding-top: 40px;
-			padding-left: 340px;
-		}
-		
-		.search {
-			margin-bottom: 10px;
-		}
-		
-		.search .toolbar {}
-	</style>
-	<!--必须使用较新版本的BootStrap才有如下效果-->
-
+	
 	<body>
-		<div class="container" style="width: 1200px;">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="page-header">
-						<h1>UPS 账务管理系统 </span></h1>
-					</div>
+		<nav class="navbar navbar-inverse" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header"> <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse"> <span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+					<a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UPS&nbsp;后台管理中心&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+				</div>
+				<div class="collapse navbar-collapse" id="example-navbar-collapse">
+					
+					<ul class="nav navbar-nav">
+					<!--系统菜单列表 根据权限加载-->
+					<#include "/index/menu.ftl" />
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a>欢迎您,${userName!''}</a>
+						</li>
+						<li>
+							<a href="javascript:void(0)" onclick="loginOut()">退出登录</a>
+						</li>
+					</ul>
 				</div>
 			</div>
-
+		</nav>
+		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-12">
-					<div>
-						<ol class="breadcrumb">
-							<li><span class="glyphicon glyphicon-home"></span>&nbsp;
-								<a href="javascript:void(0)" onclick="loginOut()">退出登录</a>
-							</li>
-							<li class="active">当前用户：${userName!''}</li>
-						</ol>
-					</div>
+				<!--子菜单栏-->	
+				<div class="col-sm-2" id="subMenus">					
+						
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-2" align="center" style="padding-top: 50px;">
-					<div id="menus" class="list-group">
-						<a href="#" class="list-group-item active">
-							主菜单
-						</a>
-						<!--系统菜单列表 根据权限加载-->
-						<#include "/index/menu.ftl" />
-					</div>
-				</div>
-				<div class="col-md-10" align="center" style="padding-left: 20px;">
-					<!--选项卡以及内容部分-->
-					<div class="row" id="tabs"></div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-10">
-					<div align="center" style="padding-top: 200px">
-						<p align="center" style="margin-top: 20px;color:#878B91;">
-							Copyright 蒲公英数据科技有限公司&copy;2017-2020
-						</p>
-					</div>
-				</div>
-			</div>
+				
+				<div class="col-sm-10">
+					<!--左边导航栏-->
+					<ol class="breadcrumb">
+						<li class="active menuName"> </li>
+						<li class="active subMenuName"> </li>
+					</ol>
+					<!--内容部分-->
+					<div id="content">
+					
+				    </div>
+			    </div>
+		    </div>
 		</div>
+		<!-- 底部页脚部分 -->
+		<div class="footer">
+			<p class="text-center">Copyright 蒲公英数据科技有限公司&copy;2017-2020 </p>
+		</div>
+	   
 	</body>
+
+	<script type="text/javascript">
+		//主菜单点击选中的样式
+		$(".nav li").click(function() {
+			$(".active").removeClass('active');
+			$(this).addClass("active");
+		});
+	</script>
+	
 	<script type="text/javascript">
 		//登出
 		function loginOut() {
@@ -94,9 +82,10 @@
 		}
 
 		//打开选项卡
-		function openTab(linkCode) {
+		function openSubMenus(linkCode,menuName) {
+			
 			$.ajax({
-				url: "/ups-account-web/index/queryTab/" + linkCode,
+				url: "/ups-account-web/index/querySubMenu/" + linkCode,
 				type: "post",
 				async: false,
 				dataType: "json",
@@ -109,13 +98,15 @@
 						$alert(vo.message);
 						return;
 					}
-					$("#tabs").empty().html(vo.result.html);
+					$("#subMenus").empty().html(vo.result.html);
 				}
 			});
+			$(".menuName").text(menuName);
 		}
 
 		//点击选项卡，加载数据
-		function requestUrl(linkUrl, linkCode) {
+		function requestUrl(linkUrl,subMenuName) {
+			$(".subMenuName").text(subMenuName);
 			$.ajax({
 				url: linkUrl,
 				type: "post",
@@ -129,7 +120,7 @@
 						$alert(vo.message);
 						return;
 					}
-					$("#"+linkCode).empty().html(vo.result.html);
+					$("#content").empty().html(vo.result.html);
 				}
 			});
 		}

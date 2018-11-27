@@ -65,8 +65,6 @@ public class IndexController {
 	 * @param
 	 * 
 	 */
-
-
 	@RequestMapping
 	public String index(ModelMap modelMap) {
 		String userName = CookieUtils.getCookieValue(request, LoginServiceImpl.USER_NAME);
@@ -75,21 +73,22 @@ public class IndexController {
 		// 加载一级菜单列表
 		Set<Menu> menus = premissionService.queryUserMenus(user, 1);
 		modelMap.put("menus", menus);
+		//展示登录名称
 		modelMap.put("userName", userName);
 		return "index";
 	}
 
 	/**
-	 * 查询一级菜单下的选项卡
+	 * 查询一级菜单下的子菜单
 	 * 
-	 * @param menu
+	 * @param linkedCode modelMap
 	 * @return
 	 * @throws ParamValidException
 	 */
 
 	@ResponseBody
-	@PostMapping("/queryTab/{linkedCode}")
-	public Vo queryTab(@PathVariable String linkedCode, ModelMap modelMap) throws ParamValidException {
+	@PostMapping("/querySubMenu/{linkedCode}")
+	public Vo querySubMenu(@PathVariable String linkedCode, ModelMap modelMap) throws ParamValidException {
 		// 查询一级菜单下的二级菜单(选项卡)
 		if (StringUtils.isEmpty(linkedCode)) {
 			throw new ParamValidException("菜单连接编码不能为空！");
@@ -108,7 +107,7 @@ public class IndexController {
 		modelMap.put("subMenus", subMenus);
 		// 渲染页面并返回html文本
 		return new Vo(VoCodeConstant.SUCCESS).putResult("html",
-				freemarkerUtils.getFreemarkerPageToString("/index/tabs.ftl", modelMap));
+				freemarkerUtils.getFreemarkerPageToString("/index/subMenus.ftl", modelMap));
 	}
 
 }

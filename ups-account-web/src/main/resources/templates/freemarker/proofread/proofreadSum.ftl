@@ -1,232 +1,134 @@
-<div>
-	<br>
-	<br>
-	<br>
-	<div class="row">
-		<div class="col-md-3">
-			<!--下拉框的固定写法，不可变动-->
-			<div class="input-group">
-				<div class="input-group-btn">
-					<button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">对账渠道 <span class="caret"></span></button>
-					<ul class="dropdown-menu">
-						<li>
-							<a href="javascript:void(0)" onclick="sSelect('宝付','01',this)">宝付</a>
-						</li>
-					</ul>
-				</div>
-				<input type="text" class="form-control" readonly="readonly">
-				<input type="hidden" value="" name="channel">
+<div class="panel panel-default">
+	<div class="panel-heading"> 条件选项 </div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="form-group col-md-3">
+				<label>对账渠道</label>
+				<select class="form-control" name="channel">
+					<option value="">全部</option>
+					<option value="01">宝付</option>
+				</select>
 			</div>
-			<!--下拉框结束-->
-		</div>
-		<div class="col-md-3">
-			<div class="input-group">
-				<div class="input-group-btn">
-					<button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">系统<span class="caret"></span></button>
-					<ul class="dropdown-menu">
-						<li>
-							<a href="javascript:void(0)" onclick="sSelect('美期','01',this)">美期</a>
-						</li>
-					</ul>
-				</div>
-				<input type="text" class="form-control" readonly="readonly">
-				<input type="hidden" value="" name="fromSystem">
+			<div class="form-group col-md-3">
+				<label>系统</label>
+				<select class="form-control" name="fromSystem">
+					<option value="">全部</option>
+					<option value="01">美期</option>
+				</select>
 			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="input-group">
-				<div class="input-group-btn">
-					<button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">业务类型<span class="caret"></span></button>
-					<ul class="dropdown-menu">
-						<li>
-							<a href="javascript:void(0)" onclick="sSelect('借款','01',this)">借款</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)" onclick="sSelect('还款','02',this)">还款</a>
-						</li>
-					</ul>
-				</div>
-				<input type="text" class="form-control" readonly="readonly">
-				<input type="hidden" value="" name="proofreadType">
+			<div class="form-group col-md-3">
+				<label>业务类型</label>
+				<select class="form-control" name="proofreadType">
+					<option value="">全部</option>
+					<option value="01">借款</option>
+					<option value="02">还款</option>
+				</select>
 			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="input-group">
-				<span class="input-group-addon">选择对账日期</span>
+			<div class="form-group col-md-3">
+				<label>选择对账日期</label>
 				<input type="text" class="form-control date" name="proofreadDate">
 			</div>
 		</div>
-
-	</div>
-	<br>
-	<div class="row">
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-3">
-		</div>
-		<div class="col-md-3" style="text-align: right;">
-			<button type="button" class="btn btn-success text-right">手动导入对账文件</button>
-		</div>
-	</div>
-	<hr />
-	<!--查询选项-->
-	<form id="queryProofreadSumForm">
-		<div class="row">
-			<div class="col-md-3">
-				<!--下拉框的固定写法，不可变动-->
-				<div class="input-group">
-					<div class="input-group-btn">
-						<button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">对账状态 <span class="caret"></span></button>
-						<ul class="dropdown-menu">
-							<li>
-							   <a href="javascript:void(0)" onclick="sSelect('全部','',this)">全部</a>
-						    </li>
-							<li>
-								<a href="javascript:void(0)" onclick="sSelect('已对账','01',this)">已对账</a>
-							</li>
-							<li>
-								<a href="javascript:void(0)" onclick="sSelect('有异常','02',this)">有异常</a>
-							</li>
-							<li>
-								<a href="javascript:void(0)" onclick="sSelect('待对账','03',this)">待对账</a>
-							</li>
-						</ul>
-					</div>
-					<input type="text" class="form-control" readonly="readonly">
-					<input type="hidden" value="" name="proofreadStatus">
-				</div>
-				<!--下拉框结束-->
-			</div>
-			<div class="col-md-3">
-				<!--下拉框的固定写法，不可变动-->
-				<div class="input-group">
-					<div class="input-group-btn">
-						<button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">对账渠道 <span class="caret"></span></button>
-						<ul class="dropdown-menu">
-							<li>
-							    <a href="javascript:void(0)" onclick="sSelect('全部','',this)">全部</a>
-						    </li>
-							<li>
-								<a href="javascript:void(0)" onclick="sSelect('宝付','01',this)">宝付</a>
-							</li>
-						</ul>
-					</div>
-					<input type="text" class="form-control" readonly="readonly">
-					<input type="hidden" value="" name="channel">
-				</div>
-				<!--下拉框结束-->
-			</div>
-			<div class="col-md-3">
-				<div class="input-group">
-					<span class="input-group-addon">选择对账日期</span>
-					<input type="text" class="form-control date" name="proofreadDate">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="input-group">
-					<span class="input-group-addon">操作员</span>
-					<input type="text" class="form-control" name="updateUser">
-				</div>
-			</div>
-		</div>
-		<br />
-		<div class="row">
-			<div class="col-md-3">
-				<div class="input-group">
-					<span class="input-group-addon">创建时间：</span>
-					<input type="text" class="form-control datetime" name="createTimeStart">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="input-group">
-					<span class="input-group-addon">至：</span>
-					<input type="text" class="form-control datetime" name="createTimeEnd">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="input-group">
-					<div class="input-group-btn">
-						<button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">系统<span class="caret"></span></button>
-						<ul class="dropdown-menu">
-							<li>
-							    <a href="javascript:void(0)" onclick="sSelect('全部','',this)">全部</a>
-						    </li>
-							<li>
-								<a href="javascript:void(0)" onclick="sSelect('美期','01',this)">美期</a>
-							</li>
-						</ul>
-					</div>
-					<input type="text" class="form-control" readonly="readonly">
-					<input type="hidden" value="" name="fromSystem">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="input-group">
-					<div class="input-group-btn">
-						<button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">业务类型<span class="caret"></span></button>
-						<ul class="dropdown-menu">
-						    <li>
-							    <a href="javascript:void(0)" onclick="sSelect('全部','',this)">全部</a>
-						    </li>
-							<li>
-								<a href="javascript:void(0)" onclick="sSelect('借款','01',this)">借款</a>
-							</li>
-							<li>
-								<a href="javascript:void(0)" onclick="sSelect('还款','02',this)">还款</a>
-							</li>
-						</ul>
-					</div>
-					<input type="text" class="form-control" readonly="readonly">
-					<input type="hidden" value="" name="proofreadType">
-				</div>
-			</div>
-		</div>
-		<br>
 		<div class="row">
 			<div class="col-md-12" style="text-align: right;">
-				<button type="button" class="btn btn-success" onclick="queryProofreadSum('1')">查询记录</button>
+				<button type="button" class="btn btn-success" onclick="">手动导入对账文件</button>
 			</div>
 		</div>
-	</form>
-	<br>
-	<h3>系统对账汇总表</h3>
-	<br>
-	<div style="width:1000px;overflow-x:auto;">
-		<table class="table table-bordered table-striped table-hover" style="width: 1800px;">
-			<thead>
-				<tr>
-					<th>创建时间</th>
-					<th>商户号/账户号</th>
-					<th style="width: 100px;">业务类型</th>
-					<th>对账渠道</th>
-					<th>对账日期</th>
-					<th>业务总金额/总笔数</th>
-					<th>渠道总金额/总笔数</th>
-					<th>对账成功总金额/总笔数</th>
-					<th>宝付对账失败数据</th>
-					<th>业务对账失败数据</th>
-					<th>对账状态</th>
-					<th>操作</th>
-					<th>最后修改时间</th>
-					<th>操作员</th>
-				</tr>
-			</thead>
-			<tbody id="proofreadSumBody">
-
-			</tbody>
-		</table>
+		<form id="queryProofreadSumForm">
+			<div class="row">
+				<div class="form-group col-md-3">
+					<label>对账状态</label>
+					<select class="form-control" name="flowStatus">
+						<option value="">全部</option>
+						<option value="01">已对账</option>
+						<option value="02">有异常</option>
+						<option value="03">待对账</option>
+					</select>
+				</div>
+				<div class="form-group col-md-3">
+					<label>对账渠道</label>
+					<select class="form-control" name="channel">
+						<option value="">全部</option>
+						<option value="01">宝付</option>
+					</select>
+				</div>
+				<div class="form-group col-md-3">
+					<label>选择对账日期</label>
+					<input type="text" class="form-control date" name="proofreadDate">
+				</div>
+				<div class="form-group col-md-3">
+					<label>操作员</label>
+					<input type="text" class="form-control" name="updateUser">
+				</div>
+			</div>			
+			<div class="row">
+				<div class="form-group col-md-3">
+					<label>创建时间</label>
+					<input type="text" class="form-control datetime" name="createTimeStart">
+				</div>
+				<div class="form-group col-md-3">
+					<label>至</label>
+					<input type="text" class="form-control datetime" name="createTimeEnd">
+				</div>
+				<div class="form-group col-md-3">
+					<label>系统</label>
+					<select class="form-control" name="fromSystem">
+						<option value="">全部</option>
+						<option value="01">美期</option>
+					</select>
+				</div>
+				<div class="form-group col-md-3">
+					<label>业务类型</label>
+					<select class="form-control" name="proofreadType">
+						<option value="">全部</option>
+						<option value="01">借款</option>
+						<option value="02">还款</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12" style="text-align: right;">
+					<button type="button" class="btn btn-success" onclick="queryProofreadSum('1')">查询记录</button>
+				</div>
+			</div>
+		</form>
 	</div>
-	<div class="row">
-		<div class="col-md-4">
+</div>
 
-		</div>
-		<div class="col-md-8" style="text-align: right;">
-			<ul class="pagination" id="proofreadSumPage">
-			</ul>
-		</div>
+<div class="table-responsive" style="width:1142px;overflow-x:auto;">
+	<table class="table table-striped  table-hover" style="width: 1800px;">
+		<thead>
+			<tr>
+				<th>创建时间</th>
+				<th>商户号/账户号</th>
+				<th style="width: 100px;">业务类型</th>
+				<th>对账渠道</th>
+				<th>对账日期</th>
+				<th>业务总金额/总笔数</th>
+				<th>渠道总金额/总笔数</th>
+				<th>对账成功总金额/总笔数</th>
+				<th>宝付对账失败数据</th>
+				<th>业务对账失败数据</th>
+				<th>对账状态</th>
+				<th>操作</th>
+				<th>最后修改时间</th>
+				<th>操作员</th>
+			</tr>
+		</thead>
+		<tbody id="proofreadSumBody">
+
+		</tbody>
+	</table>
+</div>
+<div class="row">
+	<div class="col-md-4">
+
 	</div>
+	<div class="col-md-8" style="text-align: right;">
+		<ul class="pagination" id="proofreadSumPage">
+		</ul>
+	</div>
+</div>
 </div>
 <script type="text/javascript">
 	$(function() {
