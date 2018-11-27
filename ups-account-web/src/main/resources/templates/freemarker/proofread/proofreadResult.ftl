@@ -40,7 +40,7 @@
 	</div>
 </div>
 <div class="table-responsive" style="width:1142px;overflow-x:auto;">
-	<table class="table table-striped  table-hover" style="width: 1800px;">
+	<table class="table  table-hover" style="width: 1800px;">
 		<thead>
 			<tr>
 				<th>创建时间</th>
@@ -95,7 +95,7 @@
 			data: $("#queryProofreadResultForm").serialize(),
 			paginationId: "proofreadResultPage",
 			dataAreaId: "proofreadResultBody",
-			pageSize: "8",
+			pageSize: "10",
 			action: "/ups-account-web/proofreadResult/queryProofreadResultList"
 		};
 		$.queryPage(elements, page);

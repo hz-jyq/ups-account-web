@@ -96,7 +96,7 @@
 </div>
 
 <div class="table-responsive" style="width:1142px;overflow-x:auto;">
-	<table class="table table-striped  table-hover" style="width: 1800px;">
+	<table class="table  table-hover" style="width: 1800px;">
 		<thead>
 			<tr>
 				<th>创建时间</th>
@@ -160,7 +160,7 @@
 			data: $("#queryProofreadSumForm").serialize(),
 			paginationId: "proofreadSumPage",
 			dataAreaId: "proofreadSumBody",
-			pageSize: "8",
+			pageSize: "10",
 			action: "/ups-account-web/proofreadSum/queryProofreadSumList"
 		};
 		$.queryPage(elements, page);

@@ -68,7 +68,7 @@
 	</div>
 </div>
 <div class="table-responsive" style="width:1142px;overflow-x:auto;">
-	<table class="table table-striped  table-hover" style="width: 1800px;">
+	<table class="table table-hover" style="width: 1800px;">
 		<thead>
 			<tr>
 				<th>对账日期</th>
@@ -135,7 +135,7 @@
 			data: $("#queryProofreadErrorForm").serialize(),
 			paginationId: "proofreadErrorPage",
 			dataAreaId: "proofreadErrorBody",
-			pageSize: "8",
+			pageSize: "10",
 			action: "/ups-account-web/proofreadError/queryProofreadErrorList"
 		};
 		$.queryPage(elements, page);

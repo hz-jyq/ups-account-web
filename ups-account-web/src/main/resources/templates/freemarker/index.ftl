@@ -25,7 +25,7 @@
 				</div>
 				<div class="collapse navbar-collapse" id="example-navbar-collapse">
 					
-					<ul class="nav navbar-nav">
+					<ul class="nav navbar-nav" id="menus">
 					<!--系统菜单列表 根据权限加载-->
 					<#include "/index/menu.ftl" />
 					</ul>
@@ -49,12 +49,12 @@
 				
 				<div class="col-sm-10">
 					<!--左边导航栏-->
-					<ol class="breadcrumb">
+					<ol class="breadcrumb alert-info">
 						<li class="active menuName"> </li>
 						<li class="active subMenuName"> </li>
 					</ol>
 					<!--内容部分-->
-					<div id="content">
+					<div id="content" style="height: 800px;">
 					
 				    </div>
 			    </div>
@@ -66,22 +66,25 @@
 		</div>
 	   
 	</body>
-
+	
 	<script type="text/javascript">
+		//页面加载完成后加载第一个主菜单内容
+		$(function(){
+			$("#menus a").first().click();
+		});
+		
 		//主菜单点击选中的样式
 		$(".nav li").click(function() {
 			$(".active").removeClass('active');
 			$(this).addClass("active");
 		});
-	</script>
-	
-	<script type="text/javascript">
+		
 		//登出
 		function loginOut() {
 			window.location.href = "/ups-account-web/loginOut";
 		}
 
-		//打开选项卡
+		//打开子菜单
 		function openSubMenus(linkCode,menuName) {
 			
 			$.ajax({
@@ -104,7 +107,7 @@
 			$(".menuName").text(menuName);
 		}
 
-		//点击选项卡，加载数据
+		//点击子菜单，加载数据
 		function requestUrl(linkUrl,subMenuName) {
 			$(".subMenuName").text(subMenuName);
 			$.ajax({
