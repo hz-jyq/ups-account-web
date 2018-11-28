@@ -67,7 +67,7 @@
 		</form>
 	</div>
 </div>
-<div class="table-responsive" style="width:1142px;overflow-x:auto;">
+<div class="table-responsive" style="width:1200px;overflow-x:auto;">
 	<table class="table table-hover" style="width: 1800px;">
 		<thead>
 			<tr>
@@ -89,7 +89,7 @@
 				<th>操作员</th>
 			</tr>
 		</thead>
-		<tbody id="proofreadErrorBody">
+		<tbody id="proofreadErrorBody" style="font-size: 13px;">
 
 		</tbody>
 	</table>

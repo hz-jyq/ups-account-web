@@ -16,7 +16,6 @@
 	<script src="static/plugin/bootstrap3.3.7/js/bootbox.min.js"></script>
 	<script type="text/javascript" src="static/js/public/public.js"></script>
 	<script type="text/javascript" src="static/js/public/table-page.js"></script>
-	
 	<body>
 		<nav class="navbar navbar-inverse" role="navigation">
 			<div class="container-fluid">
@@ -54,7 +53,7 @@
 						<li class="active subMenuName"> </li>
 					</ol>
 					<!--内容部分-->
-					<div id="content" style="height: 800px;">
+					<div id="content" style="height: 800px;width: 1200px;">
 					
 				    </div>
 			    </div>
@@ -62,7 +61,7 @@
 		</div>
 		<!-- 底部页脚部分 -->
 		<div class="footer">
-			<p class="text-center">Copyright 蒲公英数据科技有限公司&copy;2017-2020 </p>
+			<p class="text-center"><b>Copyright 蒲公英数据科技有限公司&copy;2017-2020</b> </p>
 		</div>
 	   
 	</body>
