@@ -148,6 +148,14 @@ public class ProofreadErrorController {
 				.putResult("channelExchangeTotalCount", proofreadErrorCountDto.getChannelExchangeTotalCount());
 	}
 	
+	/**
+	 * 重新对账触发
+	 * @param date
+	 * @param proofreadType
+	 * @param fromSystem
+	 * @return
+	 * @throws ParamValidException
+	 */
 	@ResponseBody
 	@RequestMapping("/reProofread/{fromSystem}/{proofreadType}/{date}")
 	public Vo reProofread(String date,String proofreadType,String fromSystem) throws ParamValidException {
@@ -156,8 +164,7 @@ public class ProofreadErrorController {
 			throw new ParamValidException("对账日期不能大于今天！");
 		}
 		ParamUtils.validateByExp(proofreadType, "^[0][12]$");
-			
-		
+		ParamUtils.validateByExp(fromSystem, "^[0][123]$");			
 		ProofreadResult proofreadResult=proofreadAccountApi.reProofread(fromSystem, proofreadType, proofreadDate);
 		return new Vo(VoCodeConstant.SUCCESS,"任务执行成功！").putResult("result", proofreadResult);
 	}

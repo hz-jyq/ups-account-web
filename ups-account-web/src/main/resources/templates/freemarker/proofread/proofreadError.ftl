@@ -88,8 +88,6 @@
 			</div>
 		</div>
 	</div>
-
-</div>
 </div>
 <div class="table-responsive" style="width:1200px;overflow-x:auto;">
 	<table class="table table-hover" style="width: 1800px;">
