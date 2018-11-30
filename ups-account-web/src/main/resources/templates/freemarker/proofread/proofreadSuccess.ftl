@@ -33,6 +33,14 @@
 					<option value="02">还款</option>
 				</select>
 			</div>
+			<div class="form-group col-md-3">
+				<label>商户订单号</label>
+				<input type="text" class="form-control" name="businessOrderNum">
+			</div>
+			<div class="form-group col-md-3">
+				<label>商户号</label>
+				<input type="text" class="form-control" name="businessNum">
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12" style="text-align: right;">
@@ -56,7 +64,7 @@
 	</div>
 </div>
 <div class="table-responsive" style="width:1200px;overflow-x:auto;">
-	<table class="table  table-hover" style="width: 1800px;">
+	<table class="table  table-hover" style="width: 1200px;">
 		<thead>
 			<tr>
 				<th>商户订单号</th>
@@ -122,7 +130,7 @@
 					$alert(vo.message);
 					return;
 				}
-				$("#successSum").text(vo.result.businessExchangeTotalMoney + '元/' + vo.result.businessExchangeCount + '笔');
+				$("#successSum").text(vo.result.proofreadTotalMoney + '元/' + vo.result.proofreadCount + '笔');
 			},
 			error: function() {
 				$alert('网络异常，刷新后重试！')
@@ -137,7 +145,8 @@
 			paginationId: "proofreadSuccessPage",
 			dataAreaId: "proofreadSuccessBody",
 			pageSize: "10",
-			action: "/ups-account-web/proofreadSuccess/queryProofreadSuccessList"
+			action: "/ups-account-web/proofreadSuccess/queryProofreadSuccessList",
+			callbackMethod: queryproofreadSuccessSum
 		};
 		$.queryPage(elements, page);
 	}

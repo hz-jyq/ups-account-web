@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -50,7 +49,7 @@ public class ProofreadSuccessController {
 
 	/**
 	 * 
-	 * 对账汇总主页
+	 * 对账归档主页
 	 * 
 	 * @param
 	 * 
@@ -58,40 +57,44 @@ public class ProofreadSuccessController {
 
 	@RequestMapping
 	@ResponseBody
-	public Vo index(ModelMap modelMap) {
+	public Vo index() {
 		return new Vo(VoCodeConstant.SUCCESS).putResult("html",
 				freemarkerUtils.getFreemarkerPageToString("/proofread/proofreadSuccess.ftl", null));
 
 	}
 
 	/**
-	 * 查询对账汇总列表
+	 * 查询对账归档列表
 	 * 
 	 * @param form
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("/queryProofreadSumList")
-	public Vo queryProofreadSumList(ProofreadSuccessForm form) {
+	@RequestMapping("/queryProofreadSuccessList")
+	public Vo queryProofreadSuccessList(ProofreadSuccessForm form) {
 		PageInfo<ProofreadSuccess> pageInfo = proofreadSuccessService.getPage(form);
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("proofreadSuccessList", pageInfo.getList());
 		return new Vo(VoCodeConstant.SUCCESS)
-				.putResult("html", freemarkerUtils.getFreemarkerPageToString("/proofread/proofreadSuccessTable.ftl", param))
+				.putResult("html",
+						freemarkerUtils.getFreemarkerPageToString("/proofread/proofreadSuccessTable.ftl", param))
 				.putResult("total", pageInfo.getTotal());
 
 	}
-	
+
 	/**
-	 * 查询汇总
+	 * 查询归档汇总数据
+	 * 
 	 * @param form
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping("/queryProofreadSuccessSum")
-	public Vo queryProofreadSuccessSum (ProofreadSuccessForm form) {
-		ProofreadSuccessCountDto proofreadSuccessCountDto=proofreadSuccessService.getProofreadSuccessCount(form);
-		return new Vo(VoCodeConstant.SUCCESS);
+	public Vo queryProofreadSuccessSum(ProofreadSuccessForm form) {
+		ProofreadSuccessCountDto proofreadSuccessCountDto = proofreadSuccessService.getProofreadSuccessCount(form);
+		return new Vo(VoCodeConstant.SUCCESS)
+				.putResult("proofreadTotalMoney", proofreadSuccessCountDto.getProofreadTotalMoney())
+				.putResult("proofreadCount", proofreadSuccessCountDto.getProofreadCount());
 	}
 
 }

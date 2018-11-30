@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -70,7 +69,7 @@ public class ProofreadErrorController {
 	 */
 	@ResponseBody
 	@RequestMapping
-	public Vo index(ModelMap modelMap) {
+	public Vo index() {
 		return new Vo(VoCodeConstant.SUCCESS).putResult("html",
 				freemarkerUtils.getFreemarkerPageToString("/proofread/proofreadError.ftl", null));
 	}
