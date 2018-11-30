@@ -73,6 +73,24 @@
 		</form>
 	</div>
 </div>
+<br>
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-4">
+				<b>待处理业务交易总金额/总笔数：</b><span id='businessSum'></span>
+			</div>
+			<div class="col-md-4">
+				<b>待处理渠道交易总金额/总笔数：</b><span id='channelSum'></span>
+			</div>
+			<div class="col-md-4">
+
+			</div>
+		</div>
+	</div>
+
+</div>
+</div>
 <div class="table-responsive" style="width:1200px;overflow-x:auto;">
 	<table class="table table-hover" style="width: 1800px;">
 		<thead>
@@ -124,8 +142,8 @@
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-md-12">
-                       <textarea id="remark" rows="5" cols="60" value="" placeholder="不可超过50个字"></textarea>
-	                </div>
+						<textarea id="remark" rows="5" cols="60" value="" placeholder="不可超过50个字"></textarea>
+					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -160,7 +178,30 @@
 		autoclose: true,
 		todayBtn: true
 	});
-
+    
+    //查询汇总
+	var queryProofreadErrorSum = function() {
+		$.ajax({
+			type: "post",
+			url: "/ups-account-web/proofreadError/queryProofreadErrorSum",
+			async: true,
+			data: $("#queryProofreadErrorForm").serialize(),
+			dataType: "json",
+			success: function(vo) {
+				if(vo.resultCode != '00') {
+					$alert(vo.message);
+					return;
+				}
+				$("#businessSum").text(vo.result.businessExchangeTotalMoney + '元/' + vo.result.businessExchangeCount + '笔');
+				$("#channelSum").text(vo.result.channelExchangeTotalMoney + '元/' + vo.result.channelExchangeTotalCount + '笔');
+			},
+			error: function() {
+				$alert('网络异常，刷新后重试！')
+			}
+		});
+	}
+    
+    //分页查询table
 	function queryProofreadError(page) {
 		var elements = {
 			pageNum: page,
@@ -168,7 +209,8 @@
 			paginationId: "proofreadErrorPage",
 			dataAreaId: "proofreadErrorBody",
 			pageSize: "10",
-			action: "/ups-account-web/proofreadError/queryProofreadErrorList"
+			action: "/ups-account-web/proofreadError/queryProofreadErrorList",
+			callbackMethod: queryProofreadErrorSum
 		};
 		$.queryPage(elements, page);
 	}
@@ -182,11 +224,11 @@
 
 	function discard() {
 		var id = $("#errorId").val();
-		var remark=$("#remark").val();
-        $confirm("确定进行作废操作吗？该操作不可恢复！",function(flag){
-        	if(flag){        		
-        		$.ajax({
-					url: "/ups-account-web/proofreadError/discard?id=" + id+"&remark="+remark,
+		var remark = $("#remark").val();
+		$confirm("确定进行作废操作吗？该操作不可恢复！", function(flag) {
+			if(flag) {
+				$.ajax({
+					url: "/ups-account-web/proofreadError/discard?id=" + id + "&remark=" + remark,
 					type: "post",
 					async: false,
 					dataType: "json",
@@ -203,9 +245,9 @@
 						refreshTable();
 					}
 				});
-        	}
-        })
-        $('#remarkModal').modal('hide');
+			}
+		})
+		$('#remarkModal').modal('hide');
 	}
 
 	//预留条目

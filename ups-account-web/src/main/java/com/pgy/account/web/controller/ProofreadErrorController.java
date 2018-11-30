@@ -1,5 +1,6 @@
 package com.pgy.account.web.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -20,13 +21,17 @@ import com.pgy.account.web.model.vo.Vo;
 import com.pgy.account.web.service.impl.LoginServiceImpl;
 import com.pgy.account.web.utils.FreemarkerUtils;
 import com.pgy.account.web.utils.annotation.RequiredPermission;
+import com.pgy.ups.account.facade.dto.proofread.ProofreadErrorCountDto;
+import com.pgy.ups.account.facade.dubbo.api.ProofreadAccountApi;
 import com.pgy.ups.account.facade.dubbo.api.ProofreadErrorService;
 import com.pgy.ups.account.facade.from.PageInfo;
 import com.pgy.ups.account.facade.from.ProofreadErrorForm;
 import com.pgy.ups.account.facade.model.proofread.ProofreadError;
+import com.pgy.ups.account.facade.model.proofread.ProofreadResult;
 import com.pgy.ups.common.annotation.ParamsLog;
 import com.pgy.ups.common.exception.ParamValidException;
 import com.pgy.ups.common.utils.CookieUtils;
+import com.pgy.ups.common.utils.DateUtils;
 
 /**
  * 对账异常明细登录
@@ -51,6 +56,9 @@ public class ProofreadErrorController {
 
 	@Reference(timeout = 10000)
 	private ProofreadErrorService proofreadErrorService;
+	
+	@Reference(timeout = 15000)
+	private ProofreadAccountApi proofreadAccountApi;
 
 	/**
 	 * 
@@ -83,42 +91,71 @@ public class ProofreadErrorController {
 						freemarkerUtils.getFreemarkerPageToString("/proofread/proofreadErrorTable.ftl", param))
 				.putResult("total", pageInfo.getTotal());
 	}
-	
+
 	/**
-	 *  指定记录的id 预留到下一次对账
+	 * 指定记录的id 预留到下一次对账
+	 * 
 	 * @param id
 	 * @return
-	 * @throws ParamValidException 
+	 * @throws ParamValidException
 	 */
 	@ResponseBody
 	@RequestMapping("/reserver")
 	public Vo reserverProofreadError(Long id) throws ParamValidException {
-		if(Objects.isNull(id)) {
+		if (Objects.isNull(id)) {
 			throw new ParamValidException("记录Id不能为空！");
 		}
-		String userName=CookieUtils.getCookieValue(request, LoginServiceImpl.USER_NAME);
+		String userName = CookieUtils.getCookieValue(request, LoginServiceImpl.USER_NAME);
 		proofreadErrorService.reservedProofread(id, userName);
-		return new Vo(VoCodeConstant.SUCCESS,"预留成功！");
+		return new Vo(VoCodeConstant.SUCCESS, "预留成功！");
 	}
-	
+
 	/**
-	 *  指定记录的id 修改流水状态为废弃
+	 * 指定记录的id 修改流水状态为废弃
+	 * 
 	 * @param id
 	 * @return
-	 * @throws ParamValidException 
+	 * @throws ParamValidException
 	 */
 	@ResponseBody
 	@RequestMapping("/discard")
-	public Vo discardProofreadError(Long id,String remark) throws ParamValidException {
-		if(StringUtils.isNotEmpty(remark)&&remark.length()>50) {
+	public Vo discardProofreadError(Long id, String remark) throws ParamValidException {
+		if (StringUtils.isNotEmpty(remark) && remark.length() > 50) {
 			throw new ParamValidException("备注不能超过50个字！");
 		}
-		if(Objects.isNull(id)) {
+		if (Objects.isNull(id)) {
 			throw new ParamValidException("记录Id不能为空！");
 		}
-		String userName=CookieUtils.getCookieValue(request, LoginServiceImpl.USER_NAME);
+		String userName = CookieUtils.getCookieValue(request, LoginServiceImpl.USER_NAME);
 		proofreadErrorService.cancelProofread(id, remark, userName);
-		return new Vo(VoCodeConstant.SUCCESS,"预留成功！");
+		return new Vo(VoCodeConstant.SUCCESS, "预留成功！");
+	}
+    
+	/**
+	 * 查询异常汇总数据
+	 * @param form
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/queryProofreadErrorSum")
+	public Vo queryProofreadErrorSum(ProofreadErrorForm form) {
+		ProofreadErrorCountDto proofreadErrorCountDto = proofreadErrorService.getProofreadErrorCount(form);
+		return new Vo(VoCodeConstant.SUCCESS)
+				.putResult("businessExchangeTotalMoney", proofreadErrorCountDto.getBusinessExchangeTotalMoney())
+				.putResult("businessExchangeCount", proofreadErrorCountDto.getBusinessExchangeCount())
+				.putResult("channelExchangeTotalMoney", proofreadErrorCountDto.getChannelExchangeTotalMoney())
+				.putResult("channelExchangeTotalCount", proofreadErrorCountDto.getChannelExchangeTotalCount());
+	}
+	
+	@ResponseBody
+	@RequestMapping("/reProofread/{fromSystem}/{proofreadType}/{date}")
+	public Vo reProofread(String date,String proofreadType,String fromSystem) throws ParamValidException {
+		Date proofreadDate=DateUtils.stringToDate(date);
+		if(proofreadDate.after(new Date())){
+			throw new ParamValidException("对账日期不能大于今天！");
+		}
+		ProofreadResult proofreadResult=proofreadAccountApi.reProofread(fromSystem, proofreadType, proofreadDate);
+		return new Vo(VoCodeConstant.SUCCESS,"任务执行成功！").putResult("result", proofreadResult);
 	}
 
 }
