@@ -13,11 +13,12 @@ import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.druid.util.StringUtils;
-import com.pgy.account.web.exception.BussinessException;
+
 import com.pgy.account.web.model.entity.User;
 import com.pgy.account.web.service.LoginService;
 import com.pgy.account.web.service.PremissionService;
 import com.pgy.account.web.service.impl.LoginServiceImpl;
+import com.pgy.ups.common.exception.BussinessException;
 import com.pgy.ups.common.utils.CookieUtils;
 
 

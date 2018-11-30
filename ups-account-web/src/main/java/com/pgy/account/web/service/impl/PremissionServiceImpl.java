@@ -17,12 +17,13 @@ import org.springframework.stereotype.Component;
 import com.pgy.account.web.dao.MenuDao;
 import com.pgy.account.web.dao.RoleDao;
 import com.pgy.account.web.dao.UserDao;
-import com.pgy.account.web.exception.BussinessException;
+
 import com.pgy.account.web.model.entity.Link;
 import com.pgy.account.web.model.entity.Menu;
 import com.pgy.account.web.model.entity.Role;
 import com.pgy.account.web.model.entity.User;
 import com.pgy.account.web.service.PremissionService;
+import com.pgy.ups.common.exception.BussinessException;
 
 /**
  * 权限API

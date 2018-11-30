@@ -32,6 +32,7 @@ import com.pgy.ups.common.annotation.ParamsLog;
 import com.pgy.ups.common.exception.ParamValidException;
 import com.pgy.ups.common.utils.CookieUtils;
 import com.pgy.ups.common.utils.DateUtils;
+import com.pgy.ups.common.utils.ParamUtils;
 
 /**
  * 对账异常明细登录
@@ -154,6 +155,9 @@ public class ProofreadErrorController {
 		if(proofreadDate.after(new Date())){
 			throw new ParamValidException("对账日期不能大于今天！");
 		}
+		ParamUtils.validateByExp(proofreadType, "^[0][12]$");
+			
+		
 		ProofreadResult proofreadResult=proofreadAccountApi.reProofread(fromSystem, proofreadType, proofreadDate);
 		return new Vo(VoCodeConstant.SUCCESS,"任务执行成功！").putResult("result", proofreadResult);
 	}

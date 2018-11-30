@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pgy.account.web.constant.VoCodeConstant;
-import com.pgy.account.web.exception.BussinessException;
 
 import com.pgy.account.web.model.vo.Vo;
+import com.pgy.ups.common.exception.BussinessException;
 import com.pgy.ups.common.exception.ParamValidException;
 
 /**

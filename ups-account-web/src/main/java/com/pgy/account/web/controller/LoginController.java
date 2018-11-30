@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pgy.account.web.constant.VoCodeConstant;
-import com.pgy.account.web.exception.BussinessException;
 
 import com.pgy.account.web.model.entity.User;
 import com.pgy.account.web.model.vo.Vo;
 import com.pgy.account.web.service.LoginService;
 import com.pgy.ups.common.annotation.ParamsLog;
+import com.pgy.ups.common.exception.BussinessException;
 import com.pgy.ups.common.exception.ParamValidException;
 
 
