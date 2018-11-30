@@ -2,11 +2,13 @@ package com.pgy.account.web.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.pgy.account.web.constant.VoCodeConstant;
 import com.pgy.account.web.model.vo.Vo;
+import com.pgy.account.web.service.impl.LoginServiceImpl;
 import com.pgy.account.web.utils.FreemarkerUtils;
 import com.pgy.account.web.utils.annotation.RequiredPermission;
 import com.pgy.ups.account.facade.dubbo.api.ProofreadErrorService;
@@ -22,6 +25,8 @@ import com.pgy.ups.account.facade.from.PageInfo;
 import com.pgy.ups.account.facade.from.ProofreadErrorForm;
 import com.pgy.ups.account.facade.model.proofread.ProofreadError;
 import com.pgy.ups.common.annotation.ParamsLog;
+import com.pgy.ups.common.exception.ParamValidException;
+import com.pgy.ups.common.utils.CookieUtils;
 
 /**
  * 对账异常明细登录
@@ -69,7 +74,7 @@ public class ProofreadErrorController {
 	 */
 	@ResponseBody
 	@RequestMapping("/queryProofreadErrorList")
-	public Vo queryProofreadSumList(ProofreadErrorForm form) {
+	public Vo queryProofreadErrorList(ProofreadErrorForm form) {
 		PageInfo<ProofreadError> pageInfo = proofreadErrorService.getPage(form);
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("proofreadErrorList", pageInfo.getList());
@@ -77,6 +82,43 @@ public class ProofreadErrorController {
 				.putResult("html",
 						freemarkerUtils.getFreemarkerPageToString("/proofread/proofreadErrorTable.ftl", param))
 				.putResult("total", pageInfo.getTotal());
+	}
+	
+	/**
+	 *  指定记录的id 预留到下一次对账
+	 * @param id
+	 * @return
+	 * @throws ParamValidException 
+	 */
+	@ResponseBody
+	@RequestMapping("/reserver")
+	public Vo reserverProofreadError(Long id) throws ParamValidException {
+		if(Objects.isNull(id)) {
+			throw new ParamValidException("记录Id不能为空！");
+		}
+		String userName=CookieUtils.getCookieValue(request, LoginServiceImpl.USER_NAME);
+		proofreadErrorService.reservedProofread(id, userName);
+		return new Vo(VoCodeConstant.SUCCESS,"预留成功！");
+	}
+	
+	/**
+	 *  指定记录的id 修改流水状态为废弃
+	 * @param id
+	 * @return
+	 * @throws ParamValidException 
+	 */
+	@ResponseBody
+	@RequestMapping("/discard")
+	public Vo discardProofreadError(Long id,String remark) throws ParamValidException {
+		if(StringUtils.isNotEmpty(remark)&&remark.length()>50) {
+			throw new ParamValidException("备注不能超过50个字！");
+		}
+		if(Objects.isNull(id)) {
+			throw new ParamValidException("记录Id不能为空！");
+		}
+		String userName=CookieUtils.getCookieValue(request, LoginServiceImpl.USER_NAME);
+		proofreadErrorService.cancelProofread(id, remark, userName);
+		return new Vo(VoCodeConstant.SUCCESS,"预留成功！");
 	}
 
 }

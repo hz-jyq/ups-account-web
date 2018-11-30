@@ -75,6 +75,7 @@ public class PremissionServiceImpl implements PremissionService{
 	 * @param user
 	 * @return
 	 */
+	@Override
 	public List<Role> queryUserRoles(User user) {
 		User u = useDao.queryUser(user);
 		if (Objects.isNull(u)) {
@@ -94,6 +95,7 @@ public class PremissionServiceImpl implements PremissionService{
 	 * @param m
 	 * @return
 	 */
+	@Override
 	public List<Menu> queryAvalibleSubMenus(Menu m) {
 		Menu menu = menuDao.queryMenu(m);
 		if (Objects.isNull(menu)) {
@@ -121,6 +123,7 @@ public class PremissionServiceImpl implements PremissionService{
 	 * @param user
 	 * @return
 	 */
+	@Override
 	public List<String> getUserBlackNames(User user) {
 		User u = useDao.queryUser(user);
 		if (Objects.isNull(u)) {

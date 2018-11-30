@@ -15,8 +15,9 @@ import org.springframework.stereotype.Component;
 import com.alibaba.druid.util.StringUtils;
 import com.pgy.account.web.exception.BussinessException;
 import com.pgy.account.web.model.entity.User;
+import com.pgy.account.web.service.LoginService;
+import com.pgy.account.web.service.PremissionService;
 import com.pgy.account.web.service.impl.LoginServiceImpl;
-import com.pgy.account.web.service.impl.PremissionServiceImpl;
 import com.pgy.ups.common.utils.CookieUtils;
 
 
@@ -36,10 +37,10 @@ public class PremissionAop implements Ordered{
 	private HttpServletRequest request;
 	
 	@Resource
-	private LoginServiceImpl loginApi;
+	private LoginService loginApi;
 	
 	@Resource
-	private PremissionServiceImpl premissionApi;
+	private PremissionService premissionApi;
 	
 	
 	

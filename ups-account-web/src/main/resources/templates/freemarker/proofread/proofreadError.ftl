@@ -57,7 +57,13 @@
 				<div class="form-group col-md-3">
 					<label>至：</label>
 					<input type="text" class="form-control date" name="proofreadDateEnd">
-				</div>				
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-3">
+					<label>借款编号</label>
+					<input type="text" class="form-control" name="borrowNum">
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12" style="text-align: right;">
@@ -106,6 +112,32 @@
 	</div>
 </div>
 
+<!--作废提示弹框-->
+<div class="modal fade" id="remarkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title">备注</h4>
+			</div>
+			<input type="hidden" id="errorId" value="" />
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+                       <textarea id="remark" rows="5" cols="60" value="" placeholder="不可超过50个字"></textarea>
+	                </div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-danger" onclick="discard()">作废</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+
 <script type="text/javascript">
 	$(function() {
 		queryProofreadError(1);
@@ -139,5 +171,71 @@
 			action: "/ups-account-web/proofreadError/queryProofreadErrorList"
 		};
 		$.queryPage(elements, page);
+	}
+
+	//废弃条目
+	function openDiscardModal(id) {
+		$("#errorId").val(id);
+		$("#remark").val("");
+		$('#remarkModal').modal('show');
+	}
+
+	function discard() {
+		var id = $("#errorId").val();
+		var remark=$("#remark").val();
+        $confirm("确定进行作废操作吗？该操作不可恢复！",function(flag){
+        	if(flag){        		
+        		$.ajax({
+					url: "/ups-account-web/proofreadError/discard?id=" + id+"&remark="+remark,
+					type: "post",
+					async: false,
+					dataType: "json",
+					cache: false,
+					error: function() {
+						$alert('网络异常，刷新后重试！')
+					},
+					success: function(vo) {
+						if(vo.resultCode != '00') {
+							$alert(vo.message);
+							return;
+						}
+						$alert('废弃成功！');
+						refreshTable();
+					}
+				});
+        	}
+        })
+        $('#remarkModal').modal('hide');
+	}
+
+	//预留条目
+	function reserver(id) {
+		$confirm("确定预留到下一次对账吗?", function(flag) {
+			if(flag) {
+				$.ajax({
+					url: "/ups-account-web/proofreadError/reserver?id=" + id,
+					type: "post",
+					async: false,
+					dataType: "json",
+					cache: false,
+					error: function() {
+						$alert('网络异常，刷新后重试！')
+					},
+					success: function(vo) {
+						if(vo.resultCode != '00') {
+							$alert(vo.message);
+							return;
+						}
+						$alert('预留成功！');
+						refreshTable();
+					}
+				});
+			}
+		})
+	}
+
+	function refreshTable() {
+		var currPage = $('.pagination .active').find('a').text();
+		queryProofreadError(currPage);
 	}
 </script>

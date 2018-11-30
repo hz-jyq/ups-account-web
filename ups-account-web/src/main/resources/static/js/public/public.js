@@ -19,6 +19,17 @@ function $alert(message, f) {
 	});
 }
 
+function $confirm(message, f,){
+	bootbox.confirm(
+			 { 
+			  title: "提示",
+			 /* size: "small",*/
+			  message: message, 
+			  buttons: {cancel: { label: '取消', className: 'btn-default' }, confirm: { label: '确定', className: 'btn-primary' } },
+			  callback: f			  	
+		     });
+}
+
 function $popDownloadWin() {
 	var $dialog = bootbox.dialog({
 		message: '<p class="text-center">正在下载，请稍后...</p>',

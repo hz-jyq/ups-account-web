@@ -4,7 +4,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>UPS账务管理系统-登录</title>
+        <title>UPS后台管理中心-登录</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -16,7 +16,7 @@
     <body style="background:url(static/imge/backgrounds/3.jpg) no-repeat;background-size: cover;">
 
         <div class="page-container">
-            <h1>UPS账务管理系统</h1>
+            <h1>UPS后台管理中心</h1>
             <div class="container">
                 <input type="text" id="username" class="username" placeholder="Username">
                 <input type="password" id="password" class="password" placeholder="Password">

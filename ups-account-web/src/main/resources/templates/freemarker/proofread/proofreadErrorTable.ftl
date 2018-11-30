@@ -102,7 +102,12 @@
 				${proofreadError.disposeTime!''}
 			</td>
 			<td>
-				
+				<#if proofreadError.flowStatus=='01'>
+					<div class="btn-group">					
+					    <a href="javascript:void(0)" class="btn btn-info" onclick="reserver('${proofreadError.id!''}')">预留</a>									
+						<a href="javascript:void(0)" class="btn btn-warning" onclick="openDiscardModal('${proofreadError.id!''}')">作废</a>					
+					</div>
+			    </#if>
 			</td>
 			<td>
 				

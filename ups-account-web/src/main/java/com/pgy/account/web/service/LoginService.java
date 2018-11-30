@@ -17,5 +17,7 @@ public interface LoginService {
 	void loginOut(HttpServletRequest request, HttpServletResponse response);
 
 	boolean saveLogin(User user, HttpServletResponse response);
+	
+	public boolean checkLoginStatus(HttpServletRequest request);
 
 }
