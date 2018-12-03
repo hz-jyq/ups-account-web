@@ -115,7 +115,7 @@ public class ProofreadSumController {
 		if(Boolean.TRUE.equals(proofreadResult.getSuccess())) {
 			return new Vo(VoCodeConstant.SUCCESS,"任务执行成功！").putResult("result", proofreadResult);
 		}else {			
-			return new Vo(VoCodeConstant.SUCCESS,"任务执行失败！").putResult("result", proofreadResult);
+			return new Vo(VoCodeConstant.BUSSINDESS_ERROR,"任务执行失败！").putResult("result", proofreadResult);
 		}
 	}
 
