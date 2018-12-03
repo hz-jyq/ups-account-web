@@ -1,6 +1,5 @@
 package com.pgy.account.web.controller;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -21,17 +20,13 @@ import com.pgy.account.web.service.impl.LoginServiceImpl;
 import com.pgy.account.web.utils.FreemarkerUtils;
 import com.pgy.account.web.utils.annotation.RequiredPermission;
 import com.pgy.ups.account.facade.dto.proofread.ProofreadErrorCountDto;
-import com.pgy.ups.account.facade.dubbo.api.ProofreadAccountApi;
 import com.pgy.ups.account.facade.dubbo.api.ProofreadErrorService;
 import com.pgy.ups.account.facade.from.PageInfo;
 import com.pgy.ups.account.facade.from.ProofreadErrorForm;
 import com.pgy.ups.account.facade.model.proofread.ProofreadError;
-import com.pgy.ups.account.facade.model.proofread.ProofreadResult;
 import com.pgy.ups.common.annotation.ParamsLog;
 import com.pgy.ups.common.exception.ParamValidException;
 import com.pgy.ups.common.utils.CookieUtils;
-import com.pgy.ups.common.utils.DateUtils;
-import com.pgy.ups.common.utils.ParamUtils;
 
 /**
  * 对账异常明细登录
@@ -57,8 +52,7 @@ public class ProofreadErrorController {
 	@Reference(timeout = 10000)
 	private ProofreadErrorService proofreadErrorService;
 	
-	@Reference(timeout = 15000)
-	private ProofreadAccountApi proofreadAccountApi;
+	
 
 	/**
 	 * 
@@ -147,25 +141,6 @@ public class ProofreadErrorController {
 				.putResult("channelExchangeTotalCount", proofreadErrorCountDto.getChannelExchangeTotalCount());
 	}
 	
-	/**
-	 * 重新对账触发
-	 * @param date
-	 * @param proofreadType
-	 * @param fromSystem
-	 * @return
-	 * @throws ParamValidException
-	 */
-	@ResponseBody
-	@RequestMapping("/reProofread/{fromSystem}/{proofreadType}/{date}")
-	public Vo reProofread(String date,String proofreadType,String fromSystem) throws ParamValidException {
-		Date proofreadDate=DateUtils.stringToDate(date);
-		if(proofreadDate.after(new Date())){
-			throw new ParamValidException("对账日期不能大于今天！");
-		}
-		ParamUtils.validateByExp(proofreadType, "^[0][12]$");
-		ParamUtils.validateByExp(fromSystem, "^[0][123]$");			
-		ProofreadResult proofreadResult=proofreadAccountApi.reProofread(fromSystem, proofreadType, proofreadDate);
-		return new Vo(VoCodeConstant.SUCCESS,"任务执行成功！").putResult("result", proofreadResult);
-	}
+	
 
 }

@@ -1,5 +1,6 @@
 package com.pgy.account.web.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,16 +13,22 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.druid.util.StringUtils;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.pgy.account.web.constant.VoCodeConstant;
 import com.pgy.account.web.model.vo.Vo;
 import com.pgy.account.web.utils.FreemarkerUtils;
 import com.pgy.account.web.utils.annotation.RequiredPermission;
+import com.pgy.ups.account.facade.dubbo.api.ProofreadAccountApi;
 import com.pgy.ups.account.facade.dubbo.api.ProofreadSumService;
 import com.pgy.ups.account.facade.from.PageInfo;
 import com.pgy.ups.account.facade.from.ProofreadSumForm;
+import com.pgy.ups.account.facade.model.proofread.ProofreadResult;
 import com.pgy.ups.account.facade.model.proofread.ProofreadSum;
 import com.pgy.ups.common.annotation.ParamsLog;
+import com.pgy.ups.common.exception.ParamValidException;
+import com.pgy.ups.common.utils.DateUtils;
+import com.pgy.ups.common.utils.ParamUtils;
 
 /**
  * 对账汇总登录
@@ -46,6 +53,9 @@ public class ProofreadSumController {
 
 	@Reference(timeout = 10000)
 	private ProofreadSumService proofreadSumService;
+	
+	@Reference(timeout = 15000,cluster="failfast")
+	private ProofreadAccountApi proofreadAccountApi;
 
 	/**
 	 * 
@@ -79,6 +89,34 @@ public class ProofreadSumController {
 				.putResult("html", freemarkerUtils.getFreemarkerPageToString("/proofread/proofreadSumTable.ftl", param))
 				.putResult("total", pageInfo.getTotal());
 
+	}
+	
+	/**
+	 * 重新对账触发
+	 * @param date
+	 * @param proofreadType
+	 * @param fromSystem
+	 * @return
+	 * @throws ParamValidException
+	 */
+	@ResponseBody
+	@RequestMapping("/reProofread")
+	public Vo reProofread(String date,String proofreadType,String fromSystem) throws ParamValidException {
+		if(StringUtils.isEmpty(date)||StringUtils.isEmpty(proofreadType)||StringUtils.isEmpty(fromSystem)) {
+			throw new ParamValidException("日期，对账类型，对账系统均不能为空！");
+		}
+		Date proofreadDate=DateUtils.stringToDate(date);
+		if(proofreadDate.after(new Date())){
+			throw new ParamValidException("对账日期不能超过今天！");
+		}
+		ParamUtils.validateByExp(proofreadType, "^[0][12]$");
+		ParamUtils.validateByExp(fromSystem, "^[0][123]$");			
+		ProofreadResult proofreadResult=proofreadAccountApi.reProofread(fromSystem, proofreadType, proofreadDate);
+		if(Boolean.TRUE.equals(proofreadResult.getSuccess())) {
+			return new Vo(VoCodeConstant.SUCCESS,"任务执行成功！").putResult("result", proofreadResult);
+		}else {			
+			return new Vo(VoCodeConstant.SUCCESS,"任务执行失败！").putResult("result", proofreadResult);
+		}
 	}
 
 }

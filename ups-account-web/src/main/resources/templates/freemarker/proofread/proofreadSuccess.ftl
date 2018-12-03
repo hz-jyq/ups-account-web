@@ -95,7 +95,7 @@
 </div>
 <script type="text/javascript">
 	$(function() {
-		queryproofreadSuccess(1);
+		queryProofreadSuccess(1);
 	});
 	//初始化日期控件 对账日期
 	$(".date").datetimepicker({
@@ -118,7 +118,7 @@
 	});
 	
 	//查询汇总
-	var queryproofreadSuccessSum = function() {
+	var queryProofreadSuccessSum = function() {
 		$.ajax({
 			type: "post",
 			url: "/ups-account-web/proofreadSuccess/queryProofreadSuccessSum",
@@ -138,7 +138,7 @@
 		});
 	}
 
-	function queryproofreadSuccess(page) {
+	function queryProofreadSuccess(page) {
 		var elements = {
 			pageNum: page,
 			data: $("#queryProofreadSuccessForm").serialize(),
@@ -146,7 +146,7 @@
 			dataAreaId: "proofreadSuccessBody",
 			pageSize: "10",
 			action: "/ups-account-web/proofreadSuccess/queryProofreadSuccessList",
-			callbackMethod: queryproofreadSuccessSum
+			callbackMethod: queryProofreadSuccessSum
 		};
 		$.queryPage(elements, page);
 	}

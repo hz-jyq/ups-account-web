@@ -2,36 +2,37 @@
 	<div class="panel-heading"> 条件选项 </div>
 	<div class="panel-body">
 		<div class="row">
-			<div class="form-group col-md-3">
-				<label>对账渠道</label>
-				<select class="form-control" name="channel">
-					<option value="">全部</option>
-					<option value="01">宝付</option>
-				</select>
-			</div>
-			<div class="form-group col-md-3">
-				<label>系统</label>
-				<select class="form-control" name="fromSystem">
-					<option value="">全部</option>
-					<option value="01">美期</option>
-				</select>
-			</div>
-			<div class="form-group col-md-3">
-				<label>业务类型</label>
-				<select class="form-control" name="proofreadType">
-					<option value="">全部</option>
-					<option value="01">借款</option>
-					<option value="02">还款</option>
-				</select>
-			</div>
-			<div class="form-group col-md-3">
-				<label>选择对账日期</label>
-				<input type="text" class="form-control date" name="proofreadDate">
-			</div>
+			<form id='reProofreadForm'>
+				<div class="form-group col-md-3">
+					<label>对账渠道</label>
+					<select class="form-control" name="channel">
+						<option value="01">宝付</option>
+					</select>
+				</div>
+				<div class="form-group col-md-3">
+					<label>系统</label>
+					<select class="form-control" name="fromSystem">
+						<option value="">请选择</option>
+						<option value="01">美期</option>
+					</select>
+				</div>
+				<div class="form-group col-md-3">
+					<label>业务类型</label>
+					<select class="form-control" name="proofreadType">
+						<option value="">请选择</option>
+						<option value="01">借款</option>
+						<option value="02">还款</option>
+					</select>
+				</div>
+				<div class="form-group col-md-3">
+					<label>选择对账日期</label>
+					<input type="text" class="form-control date" name="date">
+				</div>
+			</form>
 		</div>
 		<div class="row">
 			<div class="col-md-12" style="text-align: right;">
-				<button type="button" class="btn btn-success" onclick="">手动导入对账文件</button>
+				<button type="button" class="btn btn-success" onclick="reProofread()">重新对账</button>
 			</div>
 		</div>
 		<form id="queryProofreadSumForm">
@@ -60,7 +61,7 @@
 					<label>操作员</label>
 					<input type="text" class="form-control" name="updateUser">
 				</div>
-			</div>			
+			</div>
 			<div class="row">
 				<div class="form-group col-md-3">
 					<label>创建时间</label>
@@ -164,5 +165,30 @@
 			action: "/ups-account-web/proofreadSum/queryProofreadSumList"
 		};
 		$.queryPage(elements, page);
+	}
+
+	function reProofread() {
+			
+		$.ajax({
+			url: "/ups-account-web/proofreadSum/reProofread",
+			data:$('#reProofreadForm').serialize(),
+			type: "post",
+			async: false,
+			dataType: "json",
+			cache: false,
+			error: function() {
+				$alert('网络异常，刷新后重试！')
+			},
+			success: function(vo) {
+				if(vo.resultCode != '00') {
+					$alert(vo.message);
+					return;
+				}
+				else{
+					$alert('任务执行成功！');
+				}
+				queryProofreadSum(1);
+			}
+		});
 	}
 </script>
