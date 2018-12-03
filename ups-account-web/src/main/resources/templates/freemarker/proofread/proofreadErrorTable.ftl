@@ -95,6 +95,8 @@
 						已归档
 					<#elseif proofreadError.flowStatus=='04'>
 						已失效
+					<#elseif proofreadError.flowStatus=='05'>
+						预留已完成
 					</#if>
 				</#if>
 			</td>
@@ -110,7 +112,7 @@
 			    </#if>
 			</td>
 			<td>
-				
+			   ${proofreadError.remark!''}
 			</td>
 			<td>
 				${proofreadError.updateUser!''}

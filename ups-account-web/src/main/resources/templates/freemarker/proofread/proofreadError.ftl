@@ -44,6 +44,7 @@
 						<option value="02">已预留</option>
 						<option value="03">已归档</option>
 						<option value="04">已失效</option>
+						<option value="05">归档已完成</option>
 					</select>
 				</div>
 				<div class="form-group col-md-3">
