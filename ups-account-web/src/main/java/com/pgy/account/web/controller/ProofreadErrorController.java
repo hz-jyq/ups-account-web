@@ -114,7 +114,10 @@ public class ProofreadErrorController {
 	@ResponseBody
 	@RequestMapping("/discard")
 	public Vo discardProofreadError(Long id, String remark) throws ParamValidException {
-		if (StringUtils.isNotEmpty(remark) && remark.length() > 50) {
+		if(StringUtils.isEmpty(remark)) {
+			throw new ParamValidException("备注不能为空");
+		}
+		if ( remark.length() > 50) {
 			throw new ParamValidException("备注不能超过50个字！");
 		}
 		if (Objects.isNull(id)) {
