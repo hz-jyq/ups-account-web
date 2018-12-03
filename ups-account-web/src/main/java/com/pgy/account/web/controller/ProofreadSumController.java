@@ -54,7 +54,7 @@ public class ProofreadSumController {
 	@Reference(timeout = 10000)
 	private ProofreadSumService proofreadSumService;
 	
-	@Reference(timeout = 15000,cluster="failfast")
+	@Reference(timeout = 60000,cluster="failfast")
 	private ProofreadAccountApi proofreadAccountApi;
 
 	/**
