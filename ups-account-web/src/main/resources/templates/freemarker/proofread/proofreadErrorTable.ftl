@@ -96,7 +96,7 @@
 					<#elseif proofreadError.flowStatus=='04'>
 						已失效
 					<#elseif proofreadError.flowStatus=='05'>
-						预留已完成
+						预留已处理
 					</#if>
 				</#if>
 			</td>
