@@ -82,6 +82,8 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
+			<!-- 依赖不会传递 -->
+			<optional>true</optional>
 			<scope>runtime</scope>
 		</dependency>
 
