@@ -33,7 +33,7 @@
 
 			<div class="row">
 				<div class="col-md-12" style="text-align: right;">
-					<button type="button" class="btn btn-success" onclick="queryProofreadError('1')">查询记录</button>
+					<button type="button" class="btn btn-success" onclick="queryProofreadResult('1')">查询记录</button>
 				</div>
 			</div>
 		</form>
