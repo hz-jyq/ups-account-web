@@ -105,8 +105,11 @@
 			</td>
 			<td>
 				<#if proofreadError.flowStatus=='01'>
-					<div class="btn-group">					
-					    <a href="javascript:void(0)" class="btn btn-info" onclick="reserver('${proofreadError.id!''}')">预留</a>									
+					<div class="btn-group">	
+						<#if proofreadError.errorType!='01'>
+							<!--金额不一致无需预留按钮-->
+					      <a href="javascript:void(0)" class="btn btn-info" onclick="reserver('${proofreadError.id!''}')">预留</a>		
+					    </#if>
 						<a href="javascript:void(0)" class="btn btn-warning" onclick="openDiscardModal('${proofreadError.id!''}')">作废</a>					
 					</div>
 			    </#if>

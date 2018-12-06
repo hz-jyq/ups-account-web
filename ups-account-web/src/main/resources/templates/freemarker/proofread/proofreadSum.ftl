@@ -32,7 +32,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12" style="text-align: right;">
-				<button type="button" class="btn btn-success" onclick="reProofread()">重新对账</button>
+				<button type="button" class="btn btn-danger" onclick="">手动对账</button>
 			</div>
 		</div>
 		<form id="queryProofreadSumForm">
