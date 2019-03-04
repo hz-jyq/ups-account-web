@@ -47,7 +47,7 @@
     		user.userName=userName;
     		user.userPassword=userPassword;
     		$.ajax({
-    			url:"/ups-account-web/loginOn",
+    			url:"/ups-web/loginOn",
     			type:"post",
     			async:true,
     			dataType:"json",
@@ -56,7 +56,7 @@
     			success:function(data){
     				if(data.resultCode=='00'){
     					//防止缓存加时间戳
-    					window.location.href="/ups-account-web/index";
+    					window.location.href="/ups-web/index";
     				}else{
     					if($.isNotEmpty(data.message)){
     						alert(data.message);

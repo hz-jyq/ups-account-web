@@ -5,12 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.pgy</groupId>
-	<artifactId>ups-account-web</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>ups-web</artifactId>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>ups-account-web</name>
-	<description>Demo project for Spring Boot</description>
+	<name>ups-web</name>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -164,7 +163,9 @@
 		</dependency>
 
 	</dependencies>
+	
 	<build>
+	    <finalName>ups-web</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

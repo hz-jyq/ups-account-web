@@ -97,7 +97,7 @@
 			paginationId: "proofreadResultPage",
 			dataAreaId: "proofreadResultBody",
 			pageSize: "10",
-			action: "/ups-account-web/proofreadResult/queryProofreadResultList"
+			action: "/ups-web/proofreadResult/queryProofreadResultList"
 		};
 		$.queryPage(elements, page);
 	}
@@ -115,7 +115,7 @@
 		}
 		window.setTimeout(closeWin, 4000);
 		var fileName = $(e).text().trim();
-		window.location.href = "/ups-account-web/proofreadResult/channelDownload/" + channel + "/" + fromSystem + "/" + proofreadType + "/" + proofreadDate + "/" + fileName;
+		window.location.href = "/ups-web/proofreadResult/channelDownload/" + channel + "/" + fromSystem + "/" + proofreadType + "/" + proofreadDate + "/" + fileName;
 
 	}
 
@@ -127,6 +127,6 @@
 		}
 		window.setTimeout(closeWin, 4000);
 		var fileName = $(e).text().trim();
-		window.location.href = "/ups-account-web/proofreadResult/successDownload/" + channel + "/" + fromSystem + "/" + proofreadType + "/" + proofreadDate + "/" + fileName;
+		window.location.href = "/ups-web/proofreadResult/successDownload/" + channel + "/" + fromSystem + "/" + proofreadType + "/" + proofreadDate + "/" + fileName;
 	}
 </script>

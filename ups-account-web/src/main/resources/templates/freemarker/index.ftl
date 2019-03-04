@@ -82,14 +82,14 @@
 		
 		//登出
 		function loginOut() {
-			window.location.href = "/ups-account-web/loginOut";
+			window.location.href = "/ups-web/loginOut";
 		}
 
 		//打开子菜单
 		function openSubMenus(linkCode,menuName) {
 			
 			$.ajax({
-				url: "/ups-account-web/index/querySubMenu/" + linkCode,
+				url: "/ups-web/index/querySubMenu/" + linkCode,
 				type: "post",
 				async: false,
 				dataType: "json",
