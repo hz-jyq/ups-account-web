@@ -78,7 +78,7 @@ public class ProofreadErrorController {
 	@RequestMapping("/queryProofreadErrorList")
 	public Vo queryProofreadErrorList(ProofreadErrorForm form) {
 		PageInfo<ProofreadError> pageInfo = proofreadErrorService.getPage(form);
-		Map<String, Object> param = new HashMap<String, Object>();
+		Map<String, Object> param = new HashMap<>();
 		param.put("proofreadErrorList", pageInfo.getList());
 		return new Vo(VoCodeConstant.SUCCESS)
 				.putResult("html",
