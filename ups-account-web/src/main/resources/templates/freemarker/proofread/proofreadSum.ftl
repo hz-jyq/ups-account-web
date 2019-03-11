@@ -162,7 +162,7 @@
 			paginationId: "proofreadSumPage",
 			dataAreaId: "proofreadSumBody",
 			pageSize: "10",
-			action: "/ups-account-web/proofreadSum/queryProofreadSumList"
+			action: "/ups-web/proofreadSum/queryProofreadSumList"
 		};
 		$.queryPage(elements, page);
 	}
@@ -170,7 +170,7 @@
 	function reProofread() {
 			
 		$.ajax({
-			url: "/ups-account-web/proofreadSum/reProofread",
+			url: "/ups-web/proofreadSum/reProofread",
 			data:$('#reProofreadForm').serialize(),
 			type: "post",
 			async: false,

@@ -13,14 +13,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 
 @SpringBootApplication(scanBasePackages = { "com.pgy.ups.common.**", "com.pgy.account.web.**" })
-public class UpsAccountWebApplication {
+public class UpsWebApplication {
 
-	private static final Logger logger = LoggerFactory.getLogger(UpsAccountWebApplication.class);
+	private static final Logger logger = LoggerFactory.getLogger(UpsWebApplication.class);
 
 	public static void main(String[] args) {
-		logger.info("begin to start-up [ups-account-web]");
-		SpringApplication.run(UpsAccountWebApplication.class, args);
-		logger.info("start-up [ups-account-web] success !!!");
+		logger.info("begin to start-up [ups-web]");
+		SpringApplication.run(UpsWebApplication.class, args);
+		logger.info("start-up [ups-web] success !!!");
 	}
 
 }

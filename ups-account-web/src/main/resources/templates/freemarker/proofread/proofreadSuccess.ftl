@@ -121,7 +121,7 @@
 	var queryProofreadSuccessSum = function() {
 		$.ajax({
 			type: "post",
-			url: "/ups-account-web/proofreadSuccess/queryProofreadSuccessSum",
+			url: "/ups-web/proofreadSuccess/queryProofreadSuccessSum",
 			async: true,
 			data: $("#queryProofreadSuccessForm").serialize(),
 			dataType: "json",
@@ -145,7 +145,7 @@
 			paginationId: "proofreadSuccessPage",
 			dataAreaId: "proofreadSuccessBody",
 			pageSize: "10",
-			action: "/ups-account-web/proofreadSuccess/queryProofreadSuccessList",
+			action: "/ups-web/proofreadSuccess/queryProofreadSuccessList",
 			callbackMethod: queryProofreadSuccessSum
 		};
 		$.queryPage(elements, page);

@@ -182,7 +182,7 @@
 	var queryProofreadErrorSum = function() {
 		$.ajax({
 			type: "post",
-			url: "/ups-account-web/proofreadError/queryProofreadErrorSum",
+			url: "/ups-web/proofreadError/queryProofreadErrorSum",
 			async: true,
 			data: $("#queryProofreadErrorForm").serialize(),
 			dataType: "json",
@@ -208,7 +208,7 @@
 			paginationId: "proofreadErrorPage",
 			dataAreaId: "proofreadErrorBody",
 			pageSize: "10",
-			action: "/ups-account-web/proofreadError/queryProofreadErrorList",
+			action: "/ups-web/proofreadError/queryProofreadErrorList",
 			callbackMethod: queryProofreadErrorSum
 		};
 		$.queryPage(elements, page);
@@ -227,7 +227,7 @@
 		$confirm("确定进行作废操作吗？该操作不可恢复！", function(flag) {
 			if(flag) {
 				$.ajax({
-					url: "/ups-account-web/proofreadError/discard?id=" + id + "&remark=" + remark,
+					url: "/ups-web/proofreadError/discard?id=" + id + "&remark=" + remark,
 					type: "post",
 					async: false,
 					dataType: "json",
@@ -254,7 +254,7 @@
 		$confirm("确定预留到下一次对账吗?", function(flag) {
 			if(flag) {
 				$.ajax({
-					url: "/ups-account-web/proofreadError/reserver?id=" + id,
+					url: "/ups-web/proofreadError/reserver?id=" + id,
 					type: "post",
 					async: false,
 					dataType: "json",

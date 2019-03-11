@@ -5,12 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.pgy</groupId>
-	<artifactId>ups-account-web</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>ups-web</artifactId>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>ups-account-web</name>
-	<description>Demo project for Spring Boot</description>
+	<name>ups-web</name>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -39,6 +38,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
 		<dependency>
@@ -113,6 +117,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.esotericsoftware</groupId>
+			<artifactId>kryo</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.apache.curator</groupId>
 			<artifactId>curator-framework</artifactId>
 			<version>4.0.1</version>
@@ -141,7 +151,7 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.9</version>
 		</dependency>
-		
+
 		<!-- com.pgy.upsAccount dubbo的jar包依赖 -->
 
 		<dependency>
@@ -163,8 +173,15 @@
 			<version>1.0.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.pgy.ups.pay</groupId>
+			<artifactId>ups-pay-interface</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
+
 	<build>
+		<finalName>ups-web</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

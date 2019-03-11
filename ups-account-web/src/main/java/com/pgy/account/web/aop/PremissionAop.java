@@ -46,9 +46,9 @@ public class PremissionAop implements Ordered{
 	
 	
 	@Pointcut("@annotation(com.pgy.account.web.utils.annotation.RequiredPermission)||@within(com.pgy.account.web.utils.annotation.RequiredPermission)")
-	public void RequiredPermissionPointcut() {}
+	public void requiredPermissionPointcut() {}
 	
-	@Before(value="RequiredPermissionPointcut()")
+	@Before(value="requiredPermissionPointcut()")
 	public void  checkPremission(JoinPoint joinPoint) {
 		boolean flag=loginApi.checkLoginStatus(request);
 		//验证登录失败
@@ -67,7 +67,6 @@ public class PremissionAop implements Ordered{
 		if(blackNames.contains(requstUrl)) {
 			throw new BussinessException("该用户无权发起该请求！");
 		}
-		return ;
 		
 	}
 	
@@ -76,7 +75,7 @@ public class PremissionAop implements Ordered{
 	 */
 	@Override
 	public int getOrder() {
-		// TODO Auto-generated method stub
+		
 		return 2;
 	}
 
