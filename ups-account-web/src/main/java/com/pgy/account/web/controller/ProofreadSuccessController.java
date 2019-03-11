@@ -1,17 +1,5 @@
 package com.pgy.account.web.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.pgy.ups.common.page.PageInfo;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.pgy.account.web.constant.VoCodeConstant;
 import com.pgy.account.web.model.vo.Vo;
@@ -19,10 +7,19 @@ import com.pgy.account.web.utils.FreemarkerUtils;
 import com.pgy.account.web.utils.annotation.RequiredPermission;
 import com.pgy.ups.account.facade.dto.proofread.ProofreadSuccessCountDto;
 import com.pgy.ups.account.facade.dubbo.api.ProofreadSuccessService;
-import com.pgy.ups.account.facade.from.PageInfo;
 import com.pgy.ups.account.facade.from.ProofreadSuccessForm;
 import com.pgy.ups.account.facade.model.proofread.ProofreadSuccess;
 import com.pgy.ups.common.annotation.ParamsLog;
+import com.pgy.ups.common.page.PageInfo;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 对账汇总登录

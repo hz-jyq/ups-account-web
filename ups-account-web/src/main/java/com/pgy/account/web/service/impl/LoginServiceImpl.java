@@ -80,6 +80,7 @@ public class LoginServiceImpl implements LoginService{
 	 * @param request
 	 * @return
 	 */
+	@Override
 	public boolean saveLogin(User user, HttpServletResponse response) {
 		String token=BussinessUtils.getLoginToken();	
 		//存入redis成功后，和用户信息一起保存至cookie中
@@ -99,6 +100,7 @@ public class LoginServiceImpl implements LoginService{
 	 * @param request
 	 * @return
 	 */
+	@Override
 	public boolean checkLoginStatus(HttpServletRequest request) {
 		String userName=CookieUtils.getCookieValue(request, USER_NAME);
 		if(StringUtils.isEmpty(userName)) {
@@ -115,6 +117,7 @@ public class LoginServiceImpl implements LoginService{
 		return Objects.equals(loginToken, cookieToken);
 	}
 
+	@Override
 	public void loginOut(HttpServletRequest request,HttpServletResponse response) {
 		RedisUtils redisUtils=RedisUtils.getInstance();
 		String userName=CookieUtils.getCookieValue(request, USER_NAME);
