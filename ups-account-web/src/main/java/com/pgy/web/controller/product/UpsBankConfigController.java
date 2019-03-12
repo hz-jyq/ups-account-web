@@ -72,7 +72,7 @@ public class UpsBankConfigController {
 	@ResponseBody
 	@RequestMapping("/querybankConfigList")
 	public Vo querybankConfigList(UpsBankForm form) {
-		PageInfo<UpsBankEntity> pageInfo = bankConfigService.queryAll(form);
+		PageInfo<UpsBankEntity> pageInfo = bankConfigService.queryByForm(form);
 		Map<String, Object> param = new HashMap<>();
 		param.put("bankConfigList", pageInfo.getList());
 		return new Vo(VoCodeConstant.SUCCESS)
