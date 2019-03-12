@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.pgy.account.web.dao.MenuDao">
+<mapper namespace="com.pgy.web.dao.MenuDao">
     <!-- 菜单列 -->
     <sql id="menuColumn">
           l.linkId,

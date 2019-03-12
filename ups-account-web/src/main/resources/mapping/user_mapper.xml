@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.pgy.account.web.dao.UserDao">
+<mapper namespace="com.pgy.web.dao.UserDao">
     <!-- 用户列 -->
     <sql id="userColumn">
           u.userId,u.userPassword,u.userName,u.userCode,u.description
