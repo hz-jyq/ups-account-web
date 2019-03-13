@@ -1,5 +1,8 @@
 package com.pgy.web.controller.product;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +19,7 @@ import com.pgy.ups.pay.interfaces.service.config.dubbo.MerchantConfigService;
 import com.pgy.web.constant.VoCodeConstant;
 import com.pgy.web.model.vo.Vo;
 import com.pgy.web.utils.FreemarkerUtils;
+import com.pgy.web.utils.annotation.RequiredPermission;
 
 /**
  * 对账异常明细登录
@@ -24,7 +28,7 @@ import com.pgy.web.utils.FreemarkerUtils;
  *
  */
 @Controller
-//@RequiredPermission
+@RequiredPermission
 @RequestMapping("/productConfig")
 public class UpsMerchantConfigController {
 
@@ -51,7 +55,7 @@ public class UpsMerchantConfigController {
 	@RequestMapping("/showMerchant")
 	public Vo showBank() {
 		return new Vo(VoCodeConstant.SUCCESS).putResult("html",
-				freemarkerUtils.getFreemarkerPageToString("/product/bankConfig.ftl", null));
+				freemarkerUtils.getFreemarkerPageToString("/product/merchantConfig.ftl", null));
 
 	}
 
@@ -63,9 +67,28 @@ public class UpsMerchantConfigController {
 	 */
 	@ResponseBody
 	@RequestMapping("/queryMerchantConfigList")
-	public Object querybankConfigList(MerchantConfigForm form) {
+	public Vo queryMerchantConfigList(MerchantConfigForm form) {
 		PageInfo<MerchantConfigEntity> pageInfo = merchantConfigService.queryByForm(form);
-		return pageInfo;
+		Map<String, Object> param = new HashMap<>();
+		param.put("merchantConfigList", pageInfo.getList());
+		return new Vo(VoCodeConstant.SUCCESS)
+				.putResult("html", freemarkerUtils.getFreemarkerPageToString("/product/merchantConfigTable.ftl", param))
+				.putResult("total", pageInfo.getTotal());
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("/enableConfig")
+	public Vo enableConfig(Long id) {
+		merchantConfigService.enableMerchantConfig(id);
+		return new Vo(VoCodeConstant.SUCCESS,"启用成功！");				
+	}
+	
+	@ResponseBody
+	@RequestMapping("/disableConfig")
+	public Vo disableConfig(Long id) {
+		merchantConfigService.disableMerchantConfig(id);
+		return new Vo(VoCodeConstant.SUCCESS,"禁用成功！");				
 	}
 
 
