@@ -14,14 +14,15 @@
 				${merchantConfig.description!''}
 			</td>
 			<td>
-				${merchantConfig.merchantPublicKey!''}
-			</td>
-			<td>
-				${merchantConfig.upsPrivateKey!''}
+				<#if merchantConfig.merchantOrderTypeList??&&merchantConfig.merchantOrderTypeList?has_content>
+					<#list merchantConfig.merchantOrderTypeList as mot>
+						${mot.upsOrderTypeEntity.orderTypeName!''}&nbsp;&nbsp;
+					</#list>
+				</#if>
 			</td>
 			<td> 
-				 <a href="javascript:void(0)" class="btn btn-warning" onclick="removeMerchant('${merchantConfig.id!''}')">删除</a>
-				 <a href="javascript:void(0)" class="btn btn-default" onclick="openConfig('${merchantConfig.id!''}')">配置</a>
+				 <a href="javascript:void(0)" class="btn btn-warning" onclick="removeMerchantConfig('${merchantConfig.id!''}')">删除</a>
+				 <a href="javascript:void(0)" class="btn btn-default" onclick="openMerchantConfig('${merchantConfig.id!''}')">配置</a>
 				 <#if merchantConfig.available==true>
 				     <a href="javascript:void(0)" class="btn btn-danger" onclick="disableConfig('${merchantConfig.id!''}')">禁用</a>
 				 <#else>

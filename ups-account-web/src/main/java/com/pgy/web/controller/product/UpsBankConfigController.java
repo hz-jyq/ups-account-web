@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -47,6 +50,13 @@ public class UpsBankConfigController {
 
 	@Reference(timeout = 10000)
 	private BankConfigService bankConfigService;
+	
+	
+	@InitBinder
+	public void InitBinder(WebDataBinder binder) {	
+		//string 先trim再注入
+		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));		
+	}
 
 	/**
 	 * 
