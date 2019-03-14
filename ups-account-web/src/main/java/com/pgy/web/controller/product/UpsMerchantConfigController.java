@@ -135,7 +135,7 @@ public class UpsMerchantConfigController {
 		}
 		String userName = CookieUtils.getCookieValue(request, LoginServiceImpl.USER_NAME);
 		form.setUpdateUser(userName);
-		boolean success = merchantConfigService.updateById(form);
+		boolean success = merchantConfigService.updateMerchantConfig(form);
 		if (success) {
 			return new Vo(VoCodeConstant.SUCCESS, "修改成功");
 		}
