@@ -91,7 +91,7 @@ public class UpsMerchantConfigController {
 	 */
 	@ResponseBody
 	@RequestMapping("/showMerchant")
-	public Vo showBank() {
+	public Vo showMerchant() {
 		List<UpsOrderTypeEntity> orderTypeList = upsOrderTypeService.getAllOrderType();
 		Map<String, Object> param = new HashMap<>();
 		param.put("orderTypeList", orderTypeList);
@@ -158,7 +158,7 @@ public class UpsMerchantConfigController {
 		String userName = CookieUtils.getCookieValue(request, LoginServiceImpl.USER_NAME);
 		form.setUpdateUser(userName);
 		form.setCreateUser(userName);
-		MerchantConfigEntity mce = merchantConfigService.createmerchantConfig(form);
+		MerchantConfigEntity mce = merchantConfigService.createMerchantConfig(form);
 		if (Objects.nonNull(mce)) {
 			return new Vo(VoCodeConstant.SUCCESS, "创建成功");
 		}
